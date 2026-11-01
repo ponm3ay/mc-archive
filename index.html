@@ -389,7 +389,7 @@ html:not(.js) .d-reveal{opacity:1}
 </footer>
 
 <script>
-/* 微缩作品条（footer 内） */
+/* 微缩作品条（footer 内）· landing-scripts 注入成功 */
 (function(){
   var items=[
     {n:'safeyolo',d:'YOLO · CV · ★5',u:'https://github.com/ponm3ay/safeyolo'},
@@ -405,7 +405,7 @@ html:not(.js) .d-reveal{opacity:1}
   if(host){var half=items.map(function(it){return '<a href="'+it.u+'" target="_blank" rel="noopener"><b>'+it.n+'</b><span class="d">◆</span>'+it.d+'</a>'}).join('');host.innerHTML=half+half;}
 })();
 
-/* 金尘粒子 */
+/* 金尘粒子（canvas，24 颗低密度） */
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var cv=document.getElementById('dust'),ctx=cv.getContext('2d');
@@ -425,6 +425,40 @@ html:not(.js) .d-reveal{opacity:1}
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+})();
+
+/* 标语逐字显影（衬线书法感）：拆 .slogan-row 内文本为 .s-ch（.g 渐变容器内拆分以保留渐变） */
+(function(){
+  var d=1.15,idx=0;
+  document.querySelectorAll('.slogan-row').forEach(function(row){
+    var frag=document.createDocumentFragment();
+    [...row.childNodes].forEach(function(n){
+      if(n.nodeType===1&&n.classList.contains('g')){
+        var txt=n.textContent;n.textContent='';
+        [...txt].forEach(function(chr){
+          var s=document.createElement('span');
+          s.className='s-ch';
+          s.textContent=chr;
+          s.style.animationDelay=(d+idx*0.09)+'s';
+          n.appendChild(s);idx++;
+        });
+        frag.appendChild(n);
+      } else if(n.nodeType===1){
+        frag.appendChild(n);
+      } else if(n.nodeType===3){
+        [...n.textContent].forEach(function(chr){
+          var s=document.createElement('span');
+          s.className='s-ch';
+          s.textContent=chr;
+          s.style.animationDelay=(d+idx*0.09)+'s';
+          frag.appendChild(s);idx++;
+        });
+      }
+    });
+    row.textContent='';row.appendChild(frag);
+  });
+  var seal=document.querySelector('.seal');
+  if(seal)seal.style.animationDelay=(d+idx*0.09+0.2)+'s';
 })();
 
 /* 数据 + 内容区渲染 */
@@ -481,37 +515,38 @@ html:not(.js) .d-reveal{opacity:1}
 
 /* 编排：reveal / grown / attr 填充 / 顶栏 */
 (function(){
-  var tl=document.getElementById('dTimeline');
   var fillAttrs=function(){document.querySelectorAll('.attr-bar i').forEach(function(i){i.style.width=i.getAttribute('data-w')+'%'})};
+  var tl=document.getElementById('dTimeline');
+  var topbar=document.getElementById('topbar');
+  function onScroll(){
+    if(topbar){var gate=document.getElementById('profile')?document.getElementById('profile').offsetTop*0.7:400;topbar.classList.toggle('show',scrollY>gate)}
+  }
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('.d-reveal').forEach(function(e){e.classList.add('in')});
-    if(tl)tl.classList.add('grown');fillAttrs();
+    if(tl)tl.classList.add('grown');
+    fillAttrs();
   }else{
     var io=new IntersectionObserver(function(es){
       es.forEach(function(en){
         if(!en.isIntersecting)return;
         en.target.classList.add('in');
-        if(en.target.classList.contains('d-sec')){
-          en.target.querySelectorAll('.attr-bar i').forEach(function(i){i.style.width=i.getAttribute('data-w')+'%'});
-          var t=en.target.querySelector('#dTimeline');if(t)t.classList.add('grown');
-        }
+        if(en.target.id==='dTimeline')tl.classList.add('grown');
+        if(en.target.classList.contains('d-sec'))fillAttrs();
         io.unobserve(en.target);
       });
     },{threshold:0.1});
     document.querySelectorAll('.d-reveal,.d-sec').forEach(function(el){io.observe(el)});
-  }
-  /* 顶栏滚动态 */
-  var top=document.getElementById('topBar');
-  function onScroll(){
-    top.classList.toggle('solid',scrollY>40);
-    var links=document.querySelectorAll('.top-links a');
-    var ids=['top','profile','works','log','connect'];
-    var cur='top';
-    ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=120)cur=id});
-    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
+    if(tl)io.observe(tl);
   }
   addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.querySelectorAll('.tb-links a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+    });
+  });
 })();
+
 </script>
 </body>
 </html>
