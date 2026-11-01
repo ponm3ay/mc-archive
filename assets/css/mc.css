@@ -180,7 +180,8 @@ body:not(.mc-admin) .is-todo,body:not(.mc-admin) .admin-only{display:none !impor
 .p-chips{display:flex;flex-wrap:wrap;gap:8px}
 .p-chips span{font-size:11px;color:var(--dim);border:1px solid var(--line);padding:4px 12px;background:rgba(255,255,255,.02)}
 .attrs{display:flex;flex-direction:column;gap:18px;margin-top:8px}
-.attr-row{display:grid;grid-template-columns:120px 1fr 38px;align-items:center;gap:14px}
+.attr-row{display:grid;grid-template-columns:minmax(120px,auto) 1fr 38px;align-items:center;gap:14px}
+.attr-name{white-space:nowrap}
 .attr-name{font-size:11px;color:var(--dim);letter-spacing:.12em;white-space:nowrap}
 .attr-bar{height:5px;background:#242424;position:relative;overflow:hidden}
 .attr-bar i{position:absolute;inset:0;right:auto;width:0;background:var(--gold-grad);transition:width 1.2s var(--ease-out)}
