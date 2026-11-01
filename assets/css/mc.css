@@ -362,6 +362,37 @@ ul{list-style:none}
 .f-add:hover{color:var(--gold);border-color:var(--gold)}
 .f-select{background:var(--bg0);border:1px solid var(--line);color:var(--text);font-size:13px;padding:9px 12px}
 
+/* ===== Lightbox 详查（Round52 移植） ===== */
+.mc-case{position:fixed;inset:0;z-index:160;display:flex;align-items:center;justify-content:center;padding:24px}
+.mc-case[hidden]{display:none}
+.mc-backdrop{position:absolute;inset:0;background:rgba(5,5,6,.82);backdrop-filter:blur(8px);animation:fadeIn .3s}
+.mc-box{
+  position:relative;width:min(880px,100%);max-height:min(80vh,720px);overflow:auto;
+  background:var(--bg1);border:1px solid var(--line-strong);
+  padding:34px 40px 30px;
+  clip-path:polygon(0 0,0 0,0 100%,0 100%);
+  animation:cvReveal .55s var(--ease-out) .05s forwards;
+}
+@keyframes cvReveal{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+.mc-wm{
+  position:absolute;right:18px;top:4px;font-family:var(--f-disp);font-weight:700;
+  font-size:140px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(232,197,124,.16);
+  user-select:none;pointer-events:none;
+}
+.mc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.mc-no{font-size:12px;color:var(--gold);letter-spacing:.26em;font-weight:600}
+.mc-st{font-size:9.5px;letter-spacing:.18em;padding:4px 12px;border:1px solid rgba(232,197,124,.5);background:var(--gold-soft);color:var(--gold);clip-path:var(--clip-sm)}
+.mc-st.st-cyan{color:var(--cyan);border-color:rgba(126,224,210,.4);background:var(--cyan-soft)}
+.mc-st.st-red{color:var(--red);border-color:rgba(224,106,78,.5);background:var(--red-soft)}
+.mc-x{background:none;border:1px solid var(--line-strong);color:var(--dim);width:30px;height:30px;font-size:13px;transition:.2s}
+.mc-x:hover{color:var(--gold);border-color:var(--gold)}
+.mc-title{font-family:var(--f-disp);font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:.02em;margin-bottom:16px;word-break:break-all}
+.mc-desc{font-size:15.5px;color:var(--dim);line-height:2.1;margin-bottom:22px;max-width:60em}
+.mc-box .mc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.mc-box .mc-tags span{font-size:11px;color:var(--dim);border:1px solid var(--line);padding:4px 12px}
+.mc-foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px;font-size:11px;color:var(--faint);letter-spacing:.14em}
+.mc-stripe{position:absolute;left:0;right:0;bottom:0;height:5px;background:repeating-linear-gradient(-45deg,var(--gold) 0 12px,#141414 12px 24px);opacity:.7}
+
 /* ===== Toast ===== */
 .toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,80px);background:var(--bg3);border:1px solid var(--gold);color:var(--text);font-size:12px;letter-spacing:.12em;padding:11px 22px;z-index:180;clip-path:var(--clip-sm);opacity:0;pointer-events:none;transition:transform .35s var(--ease-out),opacity .35s;box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .toast.show{transform:translate(-50%,0);opacity:1}
