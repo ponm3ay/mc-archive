@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PONM3AY // DRIFTER ARCHIVE</title>
+<meta name="description" content="PONM3AY 的个人主站 · 漂泊者档案 —— AI 工具 / 桌面自动化 / CV 流水线">
+<meta name="theme-color" content="#121212">
+<meta property="og:title" content="PONM3AY // DRIFTER ARCHIVE">
+<meta property="og:description" content="把重复劳动拆成模块，交给脚本与 agent。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ponm3ay.github.io/mc-archive/">
+<meta property="og:image" content="https://ponm3ay.github.io/mc-archive/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=1">
+<link rel="preload" href="assets/fonts/chakra-petch-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/chakra-petch-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style id="mc-critical">:root{--bg0:#121212;--bg1:#181818;--bg2:#1d1d20;--bg3:#232326;--panel:#ffffff06;--line:#ffffff14;--line-strong:#ffffff38;--text:#f5f2ea;--dim:#a8a49a;--faint:#83807a;--gold:#e8c57c;--gold-deep:#b8955a;--gold-soft:#e8c57c1f;--gold-grad:linear-gradient(120deg,#f4dca8 0%,#e8c57c 45%,#c9a063 100%);--cyan:#7ee0d2;--cyan-soft:#7ee0d21a;--red:#e06a4e;--red-soft:#e06a4e1f;--ok:#8fd48a;--f-disp:"Chakra Petch","Microsoft YaHei",system-ui,sans-serif;--f-body:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-mono:"Consolas","Chakra Petch","Microsoft YaHei",monospace;--ease-out:cubic-bezier(.16,1,.3,1);--clip:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px)100%,0 100%,0 10px);--clip-sm:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px)100%,0 100%,0 7px)}*,*:before,*:after{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg0);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;margin:0;font-size:16px;line-height:1.75}::selection{background:var(--gold);color:#141414}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}h1,h2,h3,p,ul{margin:0;padding:0}ul{list-style:none}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}::-webkit-scrollbar{width:10px;height:8px}::-webkit-scrollbar-track{background:var(--bg0)}::-webkit-scrollbar-thumb{border:2px solid var(--bg0);background:#333}::-webkit-scrollbar-thumb:hover{background:var(--gold-deep)}.mono{font-family:var(--f-mono);letter-spacing:.05em}.container{width:min(1200px,100% - 48px);margin-inline-start:auto;margin-inline-end:auto}@media (max-width:640px){.container{width:calc(100% - 36px)}}.noscript-note{background:var(--red-soft);border-bottom:1px solid var(--red);font-family:var(--f-mono);padding:12px 20px;font-size:13px}.reveal{opacity:0;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);transform:translateY(26px)}.reveal.in{opacity:1;transform:none}#boot{position:fixed;z-index:200;background:var(--bg0);display:flex;animation:.5s 5s forwards bootHide;justify-content:center;align-items: center;inset:0}@keyframes bootHide{to{opacity:0;visibility:hidden}}#boot.is-done{opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}.boot-inner{width:min(560px,86vw)}.boot-lines{color:var(--dim);min-height:150px;font-size:12.5px;line-height:2}.boot-lines .bl{opacity:0;animation:.12s forwards blIn}.boot-lines .bl b{color:var(--gold);font-weight:600}.boot-lines .bl .ok{color:var(--ok)}@keyframes blIn{to{opacity:1}}.boot-bar{overflow:hidden;background:#242424;height:2px;margin:18px 0 10px}.boot-bar i{display:block;background:var(--gold-grad);width:0;height:100%;transition:width .18s}.boot-status{display:flex;color:var(--faint);letter-spacing:.15em;justify-content:space-between;font-size:11px}.boot-skip{border:1px solid var(--line-strong);color:var(--dim);letter-spacing:.2em;clip-path:var(--clip-sm);background:0 0;margin-top:26px;padding:10px 20px;transition:all .2s;font-size:11px}.boot-skip:hover{border-color:var(--gold);color:var(--gold)}.scroll-progress{position:fixed;z-index:120;height:2px;top:0;left:0;right:0}.scroll-progress i{display:block;background:var(--gold-grad);width:0;height:100%;box-shadow:0 0 8px #e8c57c80}.nav{position:fixed;z-index:110;backdrop-filter:blur(14px);background:#121212c7;border-bottom:1px solid #0000;transition:border-color .3s;top:0;left:0;right:0}.nav.is-scrolled{border-bottom-color:var(--line)}.nav-inner{display:flex;align-items: center;gap:26px;width:min(1280px,100% - 40px);height:62px;margin-inline-start:auto;margin-inline-end:auto}.nav-logo{display:flex;color:var(--gold);align-self:stretch;align-items: center;gap:9px;padding:8px 4px}.nav-mark{width:24px;height:24px}.nav-logo-text{letter-spacing:.1em;color:var(--text);font-size:15px;font-weight:700}.nav-logo-text b{color:var(--gold)}.nav-links{display:flex;gap:2px;margin:0 auto}.nav-link{position:relative;display:flex;color:var(--dim);flex-direction:column;align-items: center;gap:0;padding:10px 16px;transition:color .2s;font-size:13px}.nav-link i{letter-spacing:.24em;color:var(--faint);position:relative;z-index:1;transition:color .2s;font-size:8.5px;font-style:normal}.nav-link:before{content:"";position:absolute;background:var(--gold);opacity:0;transition:.28s var(--ease-out);z-index:0;height:18px;bottom:6px;left:12px;right:12px;transform:translateY(10px)scaleY(.2)}.nav-link:hover,.nav-link.is-active{color:#141414}.nav-link:hover i,.nav-link.is-active i{color:#3d3417}.nav-link:hover:before,.nav-link.is-active:before{opacity:1;transform:translateY(0)scaleY(1)}.nav-link{overflow:hidden}.nav-right{display:flex;color:var(--faint);letter-spacing:.12em;align-items: center;gap:16px;margin-left:auto;font-size:11px}.nav-online{display:flex;color:var(--ok);align-items: center;gap:6px}.dot{background:var(--ok);animation:2s infinite dotPulse;width:6px;height:6px;transform:rotate(45deg)}@keyframes dotPulse{0%,to{opacity:1}50%{opacity:.35}}.nav-burger{display:none;border:1px solid var(--line-strong);background:0 0;flex-direction:column;justify-content:center;align-items: center;gap:4px;width:42px;height:38px}.nav-burger span{display:block;background:var(--text);width:16px;height:1.5px;transition:all .25s}.nav-burger[aria-expanded=true] span:first-child{transform:translateY(5.5px)rotate(45deg)}.nav-burger[aria-expanded=true] span:nth-child(2){opacity:0}.nav-burger[aria-expanded=true] span:nth-child(3){transform:translateY(-5.5px)rotate(-45deg)}
+</style>
+<link rel="stylesheet" href="assets/css/mc.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/css/mc.min.css"></noscript>
+
+<link rel="stylesheet" href="assets/css/mc.css">
+</head>
+<body>
+<noscript><div class="noscript-note">本站需要启用 JavaScript。STATIC: PONM3AY — github.com/ponm3ay — sevenmaples@163.com</div></noscript>
+
+<!-- 开机 -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner mono">
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-bar"><i id="bootBarFill"></i></div>
+    <p class="boot-status"><span id="bootPct">LOADING - 0%</span><span>WUTHERING NODE</span></p>
+    <button id="bootSkip" class="boot-skip mono" type="button">SKIP ▸▸</button>
+  </div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><i id="scrollBar"></i></div>
+
+<!-- 顶栏 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top" aria-label="返回顶部">
+      <svg class="nav-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 16 4l12 20H4Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M10.5 24 16 14.5 21.5 24h-11Z" fill="currentColor"/></svg>
+      <span class="nav-logo-text mono">PONM<b>3</b>AY</span>
+    </a>
+    <nav class="nav-links mono" id="navLinks" aria-label="站内导航">
+      <a href="#top" class="nav-link is-active">首页<i>TOP</i></a>
+      <a href="#profile" class="nav-link">档案<i>PROFILE</i></a>
+      <a href="#works" class="nav-link">共鸣<i>WORKS</i></a>
+      <a href="#log" class="nav-link">轨迹<i>LOG</i></a>
+      <a href="#connect" class="nav-link">连接<i>LINK</i></a>
+    </nav>
+    <div class="nav-right mono">
+      <span class="nav-clock" id="navClock">--:--:--</span>
+      <span class="nav-online"><i class="dot"></i>ONLINE</span>
+      <button class="nav-burger" id="navBurger" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-ghost mono" aria-hidden="true">WUTHERING</div>
+    <div class="container hero-inner">
+      <p class="hero-kicker mono reveal">KURO STYLE NODE // DRIFTER ARCHIVE <b>v2</b></p>
+      <h1 class="hero-title reveal">PONM<b>3</b>AY</h1>
+      <p class="hero-sub reveal">漂泊者档案 · <span data-c="identity.name">gugu</span> · AI TOOLS / AUTOMATION / CV</p>
+      <p class="hero-line reveal" data-c="identity.mission">把重复劳动拆成模块，交给脚本与 agent。</p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-gold" href="#works">进入共鸣<span class="btn-en mono">VIEW WORKS</span></a>
+        <a class="btn btn-line" href="#connect">建立连接<span class="btn-en mono">LINK →</span></a>
+      </div>
+      <div class="hero-quick mono reveal">
+        <a class="hq" href="mailto:sevenmaples@163.com"><i>MAIL</i><span data-c="connect.mail">sevenmaples@163.com</span></a>
+        <a class="hq" href="https://github.com/ponm3ay" target="_blank" rel="noopener"><i>GITHUB</i><span data-c="connect.github">github.com/ponm3ay</span></a>
+      </div>
+    </div>
+    <div class="hero-side mono" aria-hidden="true">
+      <span>EST.2022</span><span class="hs-line"></span><span>GITHUB PAGES</span>
+    </div>
+    <a class="hero-scroll mono" href="#profile" aria-label="向下滚动">SCROLL<span></span></a>
+  </section>
+
+  <!-- 数据带 -->
+  <section class="stats" aria-label="数据统计">
+    <div class="container stats-grid">
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.repos">08</span><span class="stat-label mono">REPOS · 仓库</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.stars">05</span><span class="stat-label mono">STARS · 星标</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.followers">00</span><span class="stat-label mono">FOLLOWERS · 关注</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.since">2022.10</span><span class="stat-label mono">SINCE · 加入</span></div>
+    </div>
+  </section>
+
+  <!-- 01 档案 -->
+  <section class="sec" id="profile">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-kicker mono">01 / PROFILE</p>
+        <h2 class="sec-title">漂泊者档案</h2>
+        <p class="sec-en mono">DRIFTER FILE</p>
+      </header>
+      <div class="profile-grid">
+        <article class="p-card reveal">
+          <p class="p-tag mono">// 漂泊者共鸣 RESONANCE</p>
+          <h3 class="p-title">Codename <b data-c="identity.codename">PONM3AY</b></h3>
+          <p class="p-text" data-c="identity.bio">白天拆需求、写插件；晚上把日常动作自动化成脚本，然后 DeepSleep~zzz。专注 LLM agent 插件生态（DSH）、桌面自动化工具链与 CV 训练流水线。</p>
+          <div class="p-chips mono" id="bioChips"></div>
+        </article>
+        <article class="p-card reveal">
+          <p class="p-tag mono">// 共鸣力评估 ATTRS</p>
+          <div class="attrs" id="attrsList"></div>
+        </article>
+      </div>
+      <article class="p-card modules reveal">
+        <div class="modules-head">
+          <p class="p-tag mono">// 共鸣链 MODULES</p>
+          <p class="modules-count mono"><b id="modulesCount">10</b> LINKED</p>
+        </div>
+        <ul class="modules-grid mono" id="modulesList"></ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 02 共鸣（精选三卡） -->
+  <section class="sec sec-alt" id="works">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-kicker mono">02 / WORKS</p>
+        <h2 class="sec-title">共鸣作战</h2>
+        <p class="sec-en mono">RESONANCE CASES</p>
+      </header>
+      <div class="news-grid" id="newsGrid"></div>
+      <div class="works-more reveal">
+        <a class="btn btn-line" href="https://github.com/ponm3ay?tab=repositories" target="_blank" rel="noopener">查看全部仓库<span class="btn-en mono">ALL REPOS ↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 全部作战（行式列表） -->
+  <section class="sec" id="allworks">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-kicker mono">03 / ARCHIVE</p>
+        <h2 class="sec-title">作战档案</h2>
+        <p class="sec-en mono">FULL ARCHIVE</p>
+      </header>
+      <div class="rows" id="workRows"></div>
+    </div>
+  </section>
+
+  <!-- 04 轨迹 -->
+  <section class="sec sec-alt" id="log">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-kicker mono">04 / LOG</p>
+        <h2 class="sec-title">漂泊轨迹</h2>
+        <p class="sec-en mono">TRACE LOG</p>
+      </header>
+      <div class="timeline" id="timeline"><span class="rail" aria-hidden="true"></span></div>
+    </div>
+  </section>
+
+  <!-- 05 连接 -->
+  <section class="sec" id="connect">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-kicker mono">05 / LINK</p>
+        <h2 class="sec-title">建立连接</h2>
+        <p class="sec-en mono">CONTACT NODE</p>
+      </header>
+      <div class="link-grid" id="linkGrid">
+        <a class="l-card reveal" href="mailto:sevenmaples@163.com" id="channelMail">
+          <span class="lc-type mono">MAIL · 邮件</span>
+          <span class="lc-value" data-c="connect.mail">sevenmaples@163.com</span>
+          <span class="lc-arrow mono" aria-hidden="true">→</span>
+        </a>
+        <a class="l-card reveal" href="https://github.com/ponm3ay" target="_blank" rel="noopener" id="channelGit">
+          <span class="lc-type mono">GITHUB · 代码库</span>
+          <span class="lc-value" data-c="connect.github">github.com/ponm3ay</span>
+          <span class="lc-arrow mono" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <p class="link-note mono reveal" data-c="connect.responseNote">RESPONSE · 24-48H</p>
+    </div>
+  </section>
+
+  <!-- 底部超大导航块 -->
+  <section class="mega" aria-label="快速导航">
+    <div class="container mega-grid">
+      <a class="mega-card reveal" href="https://github.com/ponm3ay" target="_blank" rel="noopener">
+        <span class="mg-no mono">01</span><span class="mg-title">GITHUB</span><span class="mg-sub mono">代码库 · 8 REPOS</span><span class="mg-arrow mono">↗</span>
+      </a>
+      <a class="mega-card reveal" href="mailto:sevenmaples@163.com">
+        <span class="mg-no mono">02</span><span class="mg-title">MAIL</span><span class="mg-sub mono">邮件 · 163</span><span class="mg-arrow mono">↗</span>
+      </a>
+      <a class="mega-card reveal" href="https://ponm3ay.github.io/" target="_blank" rel="noopener">
+        <span class="mg-no mono">03</span><span class="mg-title">ARK Site</span><span class="mg-sub mono">旧版 · 方舟站</span><span class="mg-arrow mono">↗</span>
+      </a>
+      <button class="mega-card reveal" id="megaAdmin" type="button">
+        <span class="mg-no mono">04</span><span class="mg-title">ADMIN</span><span class="mg-sub mono">管理 · 仅站长</span><span class="mg-arrow mono">▸</span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="container footer-inner mono">
+    <span data-c="footer.text">© 2026 PONM3AY · DRIFTER ARCHIVE</span>
+    <span class="footer-sep" aria-hidden="true">◆</span>
+    <span>KURO-STYLE NODE · POWERED BY GITHUB PAGES</span>
+  </div>
+</footer>
+
+<!-- 管理后台（同架构移植） -->
+<div class="admin-modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" hidden>
+  <div class="admin-backdrop" data-admin-close></div>
+  <div class="admin-box">
+    <div class="admin-step" id="adminStepToken">
+      <div class="admin-head">
+        <h3 class="admin-title mono" id="adminTitle">ADMIN // 认证</h3>
+        <button class="admin-x" type="button" data-admin-close aria-label="关闭">✕</button>
+      </div>
+      <p class="admin-hint">输入管理员令牌解锁内容编辑。本站仅校验令牌的 SHA-256 摘要。</p>
+      <form id="tokenForm">
+        <input class="admin-token-input mono" id="tokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="MC-XXXX-XXXX-XXXX">
+        <p class="admin-err mono" id="tokenErr" hidden>ACCESS DENIED · 令牌校验失败</p>
+        <button class="btn btn-gold admin-go" type="submit">验证解锁<span class="btn-en mono">AUTH</span></button>
+      </form>
+    </div>
+    <div class="admin-step" id="adminStepEdit" hidden>
+      <div class="admin-head">
+        <h3 class="admin-title mono">ADMIN // 内容编辑</h3>
+        <button class="admin-x" type="button" data-admin-close aria-label="关闭">✕</button>
+      </div>
+      <p class="admin-hint">保存后仅本浏览器生效；「发布到 GitHub」可直接提交上线（首次需配置令牌，仅存本机）。</p>
+      <div class="admin-body" id="adminBody"></div>
+      <div class="pub-token mono" id="pubToken" hidden>
+        <p class="pub-token-title">// GITHUB 令牌（首次配置）</p>
+        <div class="pub-token-row">
+          <input class="f-input" id="ghTokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+          <button class="f-add" id="ghTokenSave" type="button">保存令牌</button>
+        </div>
+        <p class="pub-token-help">Fine-grained token：仅授 <b>ponm3ay/mc-archive</b> 的 Contents 读写。仅存本机 localStorage。</p>
+      </div>
+      <div class="pub-status mono" id="pubStatus" hidden></div>
+      <div class="admin-actions mono">
+        <button class="btn btn-gold" id="adminPublish" type="button">发布到 GitHub<span class="btn-en mono">PUBLISH</span></button>
+        <button class="btn btn-line" id="adminSave" type="button">保存到本浏览器<span class="btn-en mono">SAVE</span></button>
+        <button class="btn btn-line" id="adminExport" type="button">导出 content.json<span class="btn-en mono">EXPORT</span></button>
+        <button class="btn btn-line btn-danger" id="adminReset" type="button">恢复默认</button>
+        <button class="admin-logout mono" id="adminLogout" type="button">退出登录</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/app.min.js" defer></script>
+<script src="assets/js/admin.min.js" defer></script>
+
+</body>
+</html>

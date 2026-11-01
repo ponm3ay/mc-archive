@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4dca8"/>
+      <stop offset="1" stop-color="#c9a063"/>
+    </linearGradient>
+  </defs>
+  <!-- DRIFTER 标：墨底山形 + 金色共振波 -->
+  <rect width="64" height="64" fill="#141414"/>
+  <path d="M8 46 20 22l7 10 9-16 14 30H8Z" fill="none" stroke="url(#mg)" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M8 46h48" stroke="#e8c57c" stroke-width="2" opacity=".7"/>
+  <circle cx="45" cy="15" r="3.2" fill="#e8c57c"/>
+  <path d="M50 8h7l-7 7h7" fill="none" stroke="#e8c57c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,88 @@
+// 构建脚本：用 bun 运行（bun build.js）；node 回退为保守压缩
+// 产物：main.min.css / app.min.js / admin.min.js + index.html 内联关键 CSS（幂等）
+const fs = require('fs');
+const path = require('path');
+const ROOT = path.resolve(__dirname, '..');
+const hasBun = typeof Bun !== 'undefined' && typeof Bun.build === 'function';
+
+async function bunMinify(file) {
+  const ext = file.endsWith('.css') ? 'css' : 'js';
+  const result = await Bun.build({
+    entrypoints: [file],
+    minify: true,
+    target: 'browser'
+  });
+  if (!result.success) throw new Error('Bun.build failed: ' + result.logs.map(String).join('\n'));
+  const out = path.join(path.dirname(file), path.basename(file).replace(/\.js$|\.css$/, '') + '.min.' + ext);
+  await Bun.write(out, await result.outputs[0].text());
+  return out;
+}
+
+function naiveCss(file, out) {
+  const s = fs.readFileSync(file, 'utf8');
+  fs.writeFileSync(out, s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1'));
+}
+
+async function main() {
+  const css = path.join(ROOT, 'assets/css/main.css');
+  const cssMin = path.join(ROOT, 'assets/css/main.min.css');
+  if (hasBun) await bunMinify(css); else naiveCss(css, cssMin);
+
+  // 关键段提取（源文件内 /*CRIT-START*/ ... /*CRIT-END*/）
+  const src = fs.readFileSync(css, 'utf8');
+  const m = src.match(/\/\*CRIT-START\*\/([\s\S]*?)\/\*CRIT-END\*\//);
+  if (!m) throw new Error('CRIT markers missing');
+  const critTmp = path.join(ROOT, 'assets/css/.critical.tmp.css');
+  fs.writeFileSync(critTmp, m[1]);
+  const critMinTmp = path.join(ROOT, 'assets/css/.critical.tmp.min.css');
+  if (hasBun) await bunMinify(critTmp); else naiveCss(critTmp, critMinTmp);
+  const critical = fs.readFileSync(critMinTmp, 'utf8');
+  fs.unlinkSync(critTmp); fs.unlinkSync(critMinTmp);
+
+  if (hasBun) {
+    await bunMinify(path.join(ROOT, 'assets/js/app.js'));
+    await bunMinify(path.join(ROOT, 'assets/js/admin.js'));
+  } else {
+    fs.copyFileSync(path.join(ROOT, 'assets/js/app.js'), path.join(ROOT, 'assets/js/app.min.js'));
+    fs.copyFileSync(path.join(ROOT, 'assets/js/admin.js'), path.join(ROOT, 'assets/js/admin.min.js'));
+  }
+
+  // index.html 幂等改写：宽松归零（不依赖行格式），断言后注入
+  const htmlPath = path.join(ROOT, 'index.html');
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  // 归零：一切历史产物
+  html = html.replace(/<style id="p3-critical">[\s\S]*?<\/style>/g, '');
+  html = html.replace(/<noscript><link rel="stylesheet" href="assets\/css\/main[^"]*"><\/noscript>/g, '');
+  html = html.replace(/<link rel="stylesheet" href="assets\/css\/main[^"]*"[^>]*>/g, '');
+  html = html.replace(/<script src="assets\/js\/app[^"]*"[^>]*><\/script>/g, '');
+  html = html.replace(/<script src="assets\/js\/admin[^"]*"[^>]*><\/script>/g, '');
+  html = html.replace(/<noscript><\/noscript>/g, '');
+  html = html.replace(/\n{3,}/g, '\n\n');
+  // 注入
+  const headBlock = '<link rel="stylesheet" href="assets/fonts/fonts.css">';
+  const inject = headBlock + '\n' +
+    '<style id="p3-critical">' + critical + '</style>\n' +
+    '<link rel="stylesheet" href="assets/css/main.min.css" media="print" onload="this.media=\'all\'">\n' +
+    '<noscript><link rel="stylesheet" href="assets/css/main.min.css"></noscript>';
+  if (!html.includes(headBlock)) throw new Error('fonts.css link 缺失，注入锚点不存在');
+  html = html.replace(headBlock, inject);
+  const scriptBlock = '<script src="assets/js/content.js"></script>';
+  const scriptInject = scriptBlock + '\n' +
+    '<script src="assets/js/app.min.js" defer></script>\n' +
+    '<script src="assets/js/admin.min.js" defer></script>';
+  if (!html.includes(scriptBlock)) throw new Error('content.js script 缺失，注入锚点不存在');
+  html = html.replace(scriptBlock, scriptInject);
+  // 断言：critical 只有一份
+  const n = (html.match(/id="p3-critical"/g) || []).length;
+  if (n !== 1) throw new Error('critical 副本数异常: ' + n);
+  fs.writeFileSync(htmlPath, html);
+
+  const kb = f => (fs.statSync(path.join(ROOT, f)).size / 1024).toFixed(1) + 'K';
+  console.log(`build OK (bun=${hasBun})
+  main.min.css   ${kb('assets/css/main.min.css')}  (源 ${kb('assets/css/main.css')})
+  critical css   ${(critical.length / 1024).toFixed(1)}K
+  app.min.js     ${kb('assets/js/app.min.js')}  (源 ${kb('assets/js/app.js')})
+  admin.min.js   ${kb('assets/js/admin.min.js')}  (源 ${kb('assets/js/admin.js')})`);
+}
+
+main().catch(e => { console.error('BUILD FAIL:', e.message); process.exit(1); });

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PONM3AY // PERSONAL ARCHIVE</title>
+<meta name="description" content="PONM3AY 的个人档案站 —— AI 工具 / 桌面自动化 / CV 训练流水线。OPERATOR FILE // No.001">
+<meta name="theme-color" content="#f3f5f2">
+<meta property="og:title" content="PONM3AY // PERSONAL ARCHIVE">
+<meta property="og:description" content="把重复劳动拆成模块，交给脚本与 agent。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ponm3ay.github.io/">
+<meta property="og:image" content="https://ponm3ay.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PONM3AY // PERSONAL ARCHIVE">
+<meta name="twitter:image" content="https://ponm3ay.github.io/assets/img/og-card.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+<link rel="preload" href="assets/fonts/chakra-petch-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/chakra-petch-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style id="p3-critical">:root{--bg0:#edf0ea;--bg1:#f3f5f2;--bg2:#fbfcfa;--bg3:#e7ebe4;--panel:#fbfcfa;--line:#11141229;--line-strong:#11141266;--text:#111412;--dim:#4c524e;--faint:#656b67;--ak:#53ff18;--ak-deep:#0e7a00;--ak-soft:#53ff1829;--cyan:#0c7c00;--cyan-soft:#007c8f1a;--red:#b34700;--red-soft:#ff6a001f;--ok:#0c7c00;--f-disp:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-body:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-mono:"Consolas","Chakra Petch","Microsoft YaHei","Courier New",monospace;--ease-out:cubic-bezier(.16,1,.3,1);--clip-btn:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px)100%,0 100%,0 12px);--clip-btn-sm:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px)100%,0 100%,0 8px)}*,*:before,*:after{box-sizing:border-box}html,html:focus-within{scroll-behavior:smooth}body{background:var(--bg0);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;margin:0;font-size:16px;line-height:1.7}::selection{background:var(--ak);color:#111412}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}h1,h2,h3,h4,p,dl,dd,ul{margin:0;padding:0}ul{list-style:none}:focus-visible{outline:2px solid var(--ak);outline-offset:3px}::-webkit-scrollbar{width:10px;height:8px}::-webkit-scrollbar-track{background:var(--bg0)}::-webkit-scrollbar-thumb{border:2px solid var(--bg0);background:#c2c8bf}::-webkit-scrollbar-thumb:hover{background:var(--ak-deep)}.mono{font-family:var(--f-mono);letter-spacing:.05em}.container{width:min(1240px,100% - 48px);margin-inline-start:auto;margin-inline-end:auto}@media (max-width:640px){.container{width:calc(100% - 36px)}}.noscript-note{background:var(--red-soft);border-bottom:1px solid var(--red);font-family:var(--f-mono);padding:12px 20px;font-size:13px}#boot{position:fixed;z-index:200;background:var(--bg0);display:flex;animation:.5s 5s forwards bootAutoHide;justify-content:center;align-items: center;inset:0}@keyframes bootAutoHide{to{opacity:0;visibility:hidden}}#boot.is-done{opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}.boot-inner{width:min(560px,86vw)}.boot-lines{color:var(--dim);min-height:150px;font-size:12.5px;line-height:2}.boot-lines .bl{opacity:0;animation:.12s forwards blIn}.boot-lines .bl b{color:var(--ak-deep);font-weight:600}.boot-lines .bl .ok{color:var(--ok)}@keyframes blIn{to{opacity:1}}.boot-bar{overflow:hidden;background:#dfe5df;height:3px;margin:18px 0 10px}.boot-bar i{display:block;background:linear-gradient(90deg,var(--ak-deep),var(--ak));width:0;height:100%;transition:width .18s}.boot-status{display:flex;color:var(--faint);letter-spacing:.15em;justify-content:space-between;font-size:11px}.boot-skip{border:1px solid var(--line-strong);color:var(--dim);letter-spacing:.2em;clip-path:var(--clip-btn-sm);background:0 0;margin-top:26px;padding:11px 20px;transition:all .2s;font-size:11px}.boot-skip:hover{border-color:var(--ak-deep);color:var(--ak-deep)}.scroll-progress{position:fixed;z-index:120;background:0 0;height:2px;top:0;left:0;right:0}.scroll-progress i{display:block;background:var(--ak);width:0;height:100%;box-shadow:0 0 8px #1fb90080}.btn{display:inline-flex;font-family:var(--f-disp);clip-path:var(--clip-btn);transition:transform .2s var(--ease-out),background .2s,color .2s,box-shadow .2s;position:relative;border:none;align-items: center;gap:12px;padding:14px 26px;font-size:15px;font-weight:600}.btn .btn-en{letter-spacing:.22em;opacity:.72;font-size:10px;font-weight:500}.btn-solid{background:var(--ak);color:#111412}.btn-solid:hover{transform:translateY(-2px);box-shadow:0 6px 22px #1fb9004d}.btn-solid:active{transform:translateY(0)}.btn-ghost{color:var(--text);box-shadow:inset 0 0 0 1px var(--line-strong);background:0 0}.btn-ghost:hover{color:var(--ak-deep);box-shadow:inset 0 0 0 1px var(--ak);transform:translateY(-2px)}.btn-danger{color:var(--red)}.btn-danger:hover{box-shadow:inset 0 0 0 1px var(--red);color:var(--red);transform:none}.panel{background:var(--panel);border:1px solid var(--line);position:relative;padding:28px}.panel-corners:before,.panel-corners:after{content:"";position:absolute;border:1.5px solid var(--ak);pointer-events:none;width:16px;height:16px;transition:all .3s}.panel-corners:before{border-bottom:none;border-right:none;top:-1px;left:-1px}.panel-corners:after{border-top:none;border-left:none;bottom:-1px;right:-1px}.panel-corners:hover:before,.panel-corners:hover:after{width:24px;height:24px}.panel-tag{color:var(--faint);letter-spacing:.18em;margin-bottom:14px;font-size:11px}.panel-tag .attrs-note{display:inline-block;margin-left:10px}.chip{display:inline-block;color:var(--dim);border:1px solid var(--line);background:var(--bg1);letter-spacing:.08em;margin:0 8px 8px 0;padding:4px 12px;font-size:11.5px}.reveal{opacity:0;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);transform:translateY(26px)}.reveal.in{opacity:1;transform:none}body:not(.p3-admin) .is-todo,body:not(.p3-admin) .admin-only{display:none!important}.nav{position:fixed;z-index:110;backdrop-filter:blur(12px);background:#f3f5f2db;border-bottom:1px solid #0000;transition:border-color .3s;top:0;left:0;right:0}.nav.is-scrolled{border-bottom-color:var(--line)}.nav-inner{display:flex;align-items: center;gap:28px;height:60px}.nav-logo{display:flex;color:var(--text);align-self:stretch;align-items: center;gap:10px;padding:0 4px}.nav-logo-mark{color:var(--ak-deep);width:22px;height:22px}.nav-logo-text{letter-spacing:.12em;font-size:15px;font-weight:700}.nav-logo-sub{color:var(--faint);letter-spacing:.18em;margin-left:6px;font-size:10px}.nav-links{display:flex;gap:4px;margin-left:8px}.nav-link{position:relative;display:flex;color:var(--dim);letter-spacing:.1em;align-items:baseline;gap:6px;padding:8px 14px;transition:color .2s;font-size:12.5px}.nav-link i{color:var(--faint);position:relative;z-index:1;transition:color .2s;font-size:9.5px;font-style:normal}.nav-link i:before{content:"";position:absolute;background:var(--ak);z-index:-1;opacity:0;transition:transform .32s var(--ease-out),opacity .28s ease;inset:-2px -5px;transform:translate(-9px)skew(-14deg)}.nav-link:hover i:before,.nav-link.is-active i:before{opacity:1;transform:translate(0)skew(-14deg)}.nav-link:hover i,.nav-link.is-active i{color:#111412}.nav-link:hover{color:var(--text)}.nav-link.is-active,.nav-link.is-active i{color:var(--ak-deep)}.nav-link:after{content:"";position:absolute;background:var(--ak);transform-origin:left;transition:transform .28s var(--ease-out);height:1.5px;bottom:2px;left:14px;right:14px;transform:scaleX(0)}.nav-link.is-active:after{transform:scaleX(1)}
+</style>
+<link rel="stylesheet" href="assets/css/main.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/css/main.min.css"></noscript>
+
+<style id="p3-critical">:root{--bg0:#edf0ea;--bg1:#f3f5f2;--bg2:#fbfcfa;--bg3:#e7ebe4;--panel:#fbfcfa;--line:#11141229;--line-strong:#11141266;--text:#111412;--dim:#4c524e;--faint:#656b67;--ak:#53ff18;--ak-deep:#0e7a00;--ak-soft:#53ff1829;--cyan:#0c7c00;--cyan-soft:#007c8f1a;--red:#b34700;--red-soft:#ff6a001f;--ok:#0c7c00;--f-disp:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-body:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-mono:"Consolas","Chakra Petch","Microsoft YaHei","Courier New",monospace;--ease-out:cubic-bezier(.16,1,.3,1);--clip-btn:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px)100%,0 100%,0 12px);--clip-btn-sm:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px)100%,0 100%,0 8px)}*,*:before,*:after{box-sizing:border-box}html,html:focus-within{scroll-behavior:smooth}body{background:var(--bg0);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;margin:0;font-size:16px;line-height:1.7}::selection{background:var(--ak);color:#111412}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}h1,h2,h3,h4,p,dl,dd,ul{margin:0;padding:0}ul{list-style:none}:focus-visible{outline:2px solid var(--ak);outline-offset:3px}::-webkit-scrollbar{width:10px;height:8px}::-webkit-scrollbar-track{background:var(--bg0)}::-webkit-scrollbar-thumb{border:2px solid var(--bg0);background:#c2c8bf}::-webkit-scrollbar-thumb:hover{background:var(--ak-deep)}.mono{font-family:var(--f-mono);letter-spacing:.05em}.container{width:min(1240px,100% - 48px);margin-inline-start:auto;margin-inline-end:auto}@media (max-width:640px){.container{width:calc(100% - 36px)}}.noscript-note{background:var(--red-soft);border-bottom:1px solid var(--red);font-family:var(--f-mono);padding:12px 20px;font-size:13px}#boot{position:fixed;z-index:200;background:var(--bg0);display:flex;animation:.5s 5s forwards bootAutoHide;justify-content:center;align-items: center;inset:0}@keyframes bootAutoHide{to{opacity:0;visibility:hidden}}#boot.is-done{opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}.boot-inner{width:min(560px,86vw)}.boot-lines{color:var(--dim);min-height:150px;font-size:12.5px;line-height:2}.boot-lines .bl{opacity:0;animation:.12s forwards blIn}.boot-lines .bl b{color:var(--ak-deep);font-weight:600}.boot-lines .bl .ok{color:var(--ok)}@keyframes blIn{to{opacity:1}}.boot-bar{overflow:hidden;background:#dfe5df;height:3px;margin:18px 0 10px}.boot-bar i{display:block;background:linear-gradient(90deg,var(--ak-deep),var(--ak));width:0;height:100%;transition:width .18s}.boot-status{display:flex;color:var(--faint);letter-spacing:.15em;justify-content:space-between;font-size:11px}.boot-skip{border:1px solid var(--line-strong);color:var(--dim);letter-spacing:.2em;clip-path:var(--clip-btn-sm);background:0 0;margin-top:26px;padding:11px 20px;transition:all .2s;font-size:11px}.boot-skip:hover{border-color:var(--ak-deep);color:var(--ak-deep)}.scroll-progress{position:fixed;z-index:120;background:0 0;height:2px;top:0;left:0;right:0}.scroll-progress i{display:block;background:var(--ak);width:0;height:100%;box-shadow:0 0 8px #1fb90080}.btn{display:inline-flex;font-family:var(--f-disp);clip-path:var(--clip-btn);transition:transform .2s var(--ease-out),background .2s,color .2s,box-shadow .2s;position:relative;border:none;align-items: center;gap:12px;padding:14px 26px;font-size:15px;font-weight:600}.btn .btn-en{letter-spacing:.22em;opacity:.72;font-size:10px;font-weight:500}.btn-solid{background:var(--ak);color:#111412}.btn-solid:hover{transform:translateY(-2px);box-shadow:0 6px 22px #1fb9004d}.btn-solid:active{transform:translateY(0)}.btn-ghost{color:var(--text);box-shadow:inset 0 0 0 1px var(--line-strong);background:0 0}.btn-ghost:hover{color:var(--ak-deep);box-shadow:inset 0 0 0 1px var(--ak);transform:translateY(-2px)}.btn-danger{color:var(--red)}.btn-danger:hover{box-shadow:inset 0 0 0 1px var(--red);color:var(--red);transform:none}.panel{background:var(--panel);border:1px solid var(--line);position:relative;padding:28px}.panel-corners:before,.panel-corners:after{content:"";position:absolute;border:1.5px solid var(--ak);pointer-events:none;width:16px;height:16px;transition:all .3s}.panel-corners:before{border-bottom:none;border-right:none;top:-1px;left:-1px}.panel-corners:after{border-top:none;border-left:none;bottom:-1px;right:-1px}.panel-corners:hover:before,.panel-corners:hover:after{width:24px;height:24px}.panel-tag{color:var(--faint);letter-spacing:.18em;margin-bottom:14px;font-size:11px}.panel-tag .attrs-note{display:inline-block;margin-left:10px}.chip{display:inline-block;color:var(--dim);border:1px solid var(--line);background:var(--bg1);letter-spacing:.08em;margin:0 8px 8px 0;padding:4px 12px;font-size:11.5px}.reveal{opacity:0;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);transform:translateY(26px)}.reveal.in{opacity:1;transform:none}body:not(.p3-admin) .is-todo,body:not(.p3-admin) .admin-only{display:none!important}.nav{position:fixed;z-index:110;backdrop-filter:blur(12px);background:#f3f5f2db;border-bottom:1px solid #0000;transition:border-color .3s;top:0;left:0;right:0}.nav.is-scrolled{border-bottom-color:var(--line)}.nav-inner{display:flex;align-items: center;gap:28px;height:60px}.nav-logo{display:flex;color:var(--text);align-self:stretch;align-items: center;gap:10px;padding:0 4px}.nav-logo-mark{color:var(--ak-deep);width:22px;height:22px}.nav-logo-text{letter-spacing:.12em;font-size:15px;font-weight:700}.nav-logo-sub{color:var(--faint);letter-spacing:.18em;margin-left:6px;font-size:10px}.nav-links{display:flex;gap:4px;margin-left:8px}.nav-link{position:relative;display:flex;color:var(--dim);letter-spacing:.1em;align-items:baseline;gap:6px;padding:8px 14px;transition:color .2s;font-size:12.5px}.nav-link i{color:var(--faint);transition:color .2s;font-size:9.5px;font-style:normal}.nav-link:hover{color:var(--text)}.nav-link.is-active,.nav-link.is-active i{color:var(--ak-deep)}.nav-link:after{content:"";position:absolute;background:var(--ak);transform-origin:left;transition:transform .28s var(--ease-out);height:1.5px;bottom:2px;left:14px;right:14px;transform:scaleX(0)}.nav-link.is-active:after{transform:scaleX(1)}
+</style>
+
+
+
+<style id="p3-critical">:root{--bg0:#edf0ea;--bg1:#f3f5f2;--bg2:#fbfcfa;--bg3:#e7ebe4;--panel:#fbfcfa;--line:#11141229;--line-strong:#11141266;--text:#111412;--dim:#4c524e;--faint:#656b67;--ak:#53ff18;--ak-deep:#0e7a00;--ak-soft:#53ff1829;--cyan:#0c7c00;--cyan-soft:#007c8f1a;--red:#b34700;--red-soft:#ff6a001f;--ok:#0c7c00;--f-disp:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-body:"Chakra Petch","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;--f-mono:"Consolas","Chakra Petch","Microsoft YaHei","Courier New",monospace;--ease-out:cubic-bezier(.16,1,.3,1);--clip-btn:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px)100%,0 100%,0 12px);--clip-btn-sm:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px)100%,0 100%,0 8px)}*,*:before,*:after{box-sizing:border-box}html,html:focus-within{scroll-behavior:smooth}body{background:var(--bg0);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;margin:0;font-size:16px;line-height:1.7}::selection{background:var(--ak);color:#111412}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}h1,h2,h3,h4,p,dl,dd,ul{margin:0;padding:0}ul{list-style:none}:focus-visible{outline:2px solid var(--ak);outline-offset:3px}::-webkit-scrollbar{width:10px;height:8px}::-webkit-scrollbar-track{background:var(--bg0)}::-webkit-scrollbar-thumb{border:2px solid var(--bg0);background:#c2c8bf}::-webkit-scrollbar-thumb:hover{background:var(--ak-deep)}.mono{font-family:var(--f-mono);letter-spacing:.05em}.container{width:min(1240px,100% - 48px);margin-inline-start:auto;margin-inline-end:auto}@media (max-width:640px){.container{width:calc(100% - 36px)}}.noscript-note{background:var(--red-soft);border-bottom:1px solid var(--red);font-family:var(--f-mono);padding:12px 20px;font-size:13px}#boot{position:fixed;z-index:200;background:var(--bg0);display:flex;animation:.5s 5s forwards bootAutoHide;justify-content:center;align-items: center;inset:0}@keyframes bootAutoHide{to{opacity:0;visibility:hidden}}#boot.is-done{opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}.boot-inner{width:min(560px,86vw)}.boot-lines{color:var(--dim);min-height:150px;font-size:12.5px;line-height:2}.boot-lines .bl{opacity:0;animation:.12s forwards blIn}.boot-lines .bl b{color:var(--ak-deep);font-weight:600}.boot-lines .bl .ok{color:var(--ok)}@keyframes blIn{to{opacity:1}}.boot-bar{overflow:hidden;background:#dfe5df;height:3px;margin:18px 0 10px}.boot-bar i{display:block;background:linear-gradient(90deg,var(--ak-deep),var(--ak));width:0;height:100%;transition:width .18s}.boot-status{display:flex;color:var(--faint);letter-spacing:.15em;justify-content:space-between;font-size:11px}.boot-skip{border:1px solid var(--line-strong);color:var(--dim);letter-spacing:.2em;clip-path:var(--clip-btn-sm);background:0 0;margin-top:26px;padding:11px 20px;transition:all .2s;font-size:11px}.boot-skip:hover{border-color:var(--ak-deep);color:var(--ak-deep)}.scroll-progress{position:fixed;z-index:120;background:0 0;height:2px;top:0;left:0;right:0}.scroll-progress i{display:block;background:var(--ak);width:0;height:100%;box-shadow:0 0 8px #1fb90080}.btn{display:inline-flex;font-family:var(--f-disp);clip-path:var(--clip-btn);transition:transform .2s var(--ease-out),background .2s,color .2s,box-shadow .2s;position:relative;border:none;align-items: center;gap:12px;padding:14px 26px;font-size:15px;font-weight:600}.btn .btn-en{letter-spacing:.22em;opacity:.72;font-size:10px;font-weight:500}.btn-solid{background:var(--ak);color:#111412}.btn-solid:hover{transform:translateY(-2px);box-shadow:0 6px 22px #1fb9004d}.btn-solid:active{transform:translateY(0)}.btn-ghost{color:var(--text);box-shadow:inset 0 0 0 1px var(--line-strong);background:0 0}.btn-ghost:hover{color:var(--ak-deep);box-shadow:inset 0 0 0 1px var(--ak);transform:translateY(-2px)}.btn-danger{color:var(--red)}.btn-danger:hover{box-shadow:inset 0 0 0 1px var(--red);color:var(--red);transform:none}.panel{background:var(--panel);border:1px solid var(--line);position:relative;padding:28px}.panel-corners:before,.panel-corners:after{content:"";position:absolute;border:1.5px solid var(--ak);pointer-events:none;width:16px;height:16px;transition:all .3s}.panel-corners:before{border-bottom:none;border-right:none;top:-1px;left:-1px}.panel-corners:after{border-top:none;border-left:none;bottom:-1px;right:-1px}.panel-corners:hover:before,.panel-corners:hover:after{width:24px;height:24px}.panel-tag{color:var(--faint);letter-spacing:.18em;margin-bottom:14px;font-size:11px}.panel-tag .attrs-note{display:inline-block;margin-left:10px}.chip{display:inline-block;color:var(--dim);border:1px solid var(--line);background:var(--bg1);letter-spacing:.08em;margin:0 8px 8px 0;padding:4px 12px;font-size:11.5px}.reveal{opacity:0;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);transform:translateY(26px)}.reveal.in{opacity:1;transform:none}body:not(.p3-admin) .is-todo,body:not(.p3-admin) .admin-only{display:none!important}.nav{position:fixed;z-index:110;backdrop-filter:blur(12px);background:#f3f5f2db;border-bottom:1px solid #0000;transition:border-color .3s;top:0;left:0;right:0}.nav.is-scrolled{border-bottom-color:var(--line)}.nav-inner{display:flex;align-items: center;gap:28px;height:60px}.nav-logo{display:flex;color:var(--text);align-self:stretch;align-items: center;gap:10px;padding:0 4px}.nav-logo-mark{color:var(--ak-deep);width:22px;height:22px}.nav-logo-text{letter-spacing:.12em;font-size:15px;font-weight:700}.nav-logo-sub{color:var(--faint);letter-spacing:.18em;margin-left:6px;font-size:10px}.nav-links{display:flex;gap:4px;margin-left:8px}.nav-link{position:relative;display:flex;color:var(--dim);letter-spacing:.1em;align-items:baseline;gap:6px;padding:8px 14px;transition:color .2s;font-size:12.5px}.nav-link i{color:var(--faint);transition:color .2s;font-size:9.5px;font-style:normal}.nav-link:hover{color:var(--text)}.nav-link.is-active,.nav-link.is-active i{color:var(--ak-deep)}.nav-link:after{content:"";position:absolute;background:var(--ak);transform-origin:left;transition:transform .28s var(--ease-out);height:1.5px;bottom:2px;left:14px;right:14px;transform:scaleX(0)}.nav-link.is-active:after{transform:scaleX(1)}
+</style>
+
+
+</head>
+<body>
+<noscript><div class="noscript-note">本站需要启用 JavaScript 才能加载档案数据。STATIC FALLBACK: PONM3AY — github.com/ponm3ay — sevenmaples@163.com</div></noscript>
+
+<!-- ===== 开机启动序列 ===== -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner mono">
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-bar"><i id="bootBarFill"></i></div>
+    <p class="boot-status"><span id="bootPct">LOADING - 0%</span><span>LOADING</span></p>
+    <button id="bootSkip" class="boot-skip mono" type="button">SKIP ▸▸</button>
+  </div>
+</div>
+
+<!-- ===== 滚动进度 ===== -->
+<div class="scroll-progress" aria-hidden="true"><i id="scrollBar"></i></div>
+
+<!-- ===== 导航 ===== -->
+<header class="nav" id="nav">
+  <div class="nav-inner container">
+    <a class="nav-logo" href="#top" aria-label="返回顶部">
+      <svg class="nav-logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.2 21.6 6.7v10.6L12 22.8 2.4 17.3V6.7Z" fill="#111412" stroke="currentColor" stroke-width="1.5"/><polyline points="5.6,12.6 8.8,12.6 10.4,8.7 13.1,16.1 14.8,11 16.1,12.6 18.9,12.6" fill="none" stroke="#53ff18" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.4" cy="8.7" r="1" fill="#53ff18"/><path d="M17.2 4.6h2.9l-2.9 2.9h2.9" fill="none" stroke="#53ff18" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav-logo-text mono">P3<span class="nav-logo-sub">// ARCHIVE</span></span>
+    </a>
+    <nav class="nav-links mono" id="navLinks" aria-label="站内导航">
+      <a href="#top" class="nav-link is-active"><i>00</i>TOP</a>
+      <a href="#profile" class="nav-link"><i>01</i>档案</a>
+      <a href="#operations" class="nav-link"><i>02</i>作战</a>
+      <a href="#log" class="nav-link"><i>03</i>日志</a>
+      <a href="#connect" class="nav-link"><i>04</i>连接</a>
+    </nav>
+    <div class="nav-right mono">
+      <span class="nav-clock" id="navClock">LOCAL --:--:--</span>
+      <span class="nav-online"><i class="dot" aria-hidden="true"></i>ONLINE</span>
+      <button class="nav-burger" id="navBurger" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-main">
+        <p class="hero-file mono reveal">OPERATOR FILE // <span data-c="identity.fileNo">No.001</span> · CLEARANCE <span data-c="identity.clearance">PUBLIC</span></p>
+        <h1 class="hero-name glitch reveal" data-text="PONM3AY">PONM3AY</h1>
+        <p class="hero-sub mono reveal"><span data-c="identity.name">gugu</span> · <span data-c="identity.role">AI TOOLS / AUTOMATION / CV</span></p>
+        <p class="hero-mission reveal" data-c="identity.mission">把重复劳动拆成模块，交给脚本与 agent——<br>人在回路之外，安心睡觉。</p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-solid" href="#operations">开始行动<span class="btn-en mono">VIEW OPERATIONS</span></a>
+          <a class="btn btn-ghost" href="#connect">建立连接<span class="btn-en mono">LINK →</span></a>
+        </div>
+        <div class="hero-quick mono reveal">
+          <a class="hq-link" id="hqMail" href="mailto:sevenmaples@163.com"><i>MAIL</i><span data-c="connect.mail">sevenmaples@163.com</span></a>
+          <a class="hq-link" id="hqGit" href="https://github.com/ponm3ay" target="_blank" rel="noopener"><i>GITHUB</i><span data-c="connect.github">github.com/ponm3ay</span></a>
+        </div>
+      </div>
+      <aside class="hero-aside reveal" aria-label="状态面板">
+        <div class="status-card panel-corners">
+          <div class="status-head mono"><span>CORE // SIGNAL</span><span class="sync mono">SYNC <b id="syncVal">99.7</b>%</span></div>
+          <div class="core-visual" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <g class="core-spin">
+                <path d="M100 30 170 100 100 170 30 100Z" fill="none" stroke="rgba(31,185,0,.85)" stroke-width="1.5"/>
+                <path d="M100 55 145 100 100 145 55 100Z" fill="rgba(83,255,24,.10)" stroke="rgba(31,185,0,.45)" stroke-width="1"/>
+              </g>
+              <g class="core-spin-rev">
+                <circle cx="100" cy="100" r="82" fill="none" stroke="rgba(17,20,18,.20)" stroke-width="1" stroke-dasharray="4 10"/>
+                <path d="M100 78 122 100 100 122 78 100Z" fill="rgba(31,185,0,.9)"/>
+              </g>
+              <g class="mono core-label" fill="rgba(17,20,18,.5)" font-size="7" font-family="monospace">
+                <text x="100" y="14" text-anchor="middle">000</text>
+                <text x="192" y="103" text-anchor="middle">090</text>
+                <text x="100" y="195" text-anchor="middle">180</text>
+                <text x="8" y="103" text-anchor="middle">270</text>
+              </g>
+            </svg>
+            <span class="core-scan" aria-hidden="true"></span>
+          </div>
+          <dl class="status-grid mono">
+            <div><dt>SIGNAL</dt><dd class="ok">ACTIVE</dd></div>
+            <div><dt>SECTOR</dt><dd data-c="identity.location">CN / [待编辑]</dd></div>
+            <div><dt>UPDATED</dt><dd data-c="meta.updated">2026.10</dd></div>
+            <div><dt>FOCUS</dt><dd data-c="identity.focus">AI × TOOLS × OPS</dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+    <div class="hero-foot mono container">
+      <span>SCROLL <b>▼</b></span>
+      <span class="hero-foot-mid">RHODES-like PERSONAL NODE · EST. 2022</span>
+      <span id="heroXY">X:0000 / Y:0000</span>
+    </div>
+  </section>
+
+  <!-- ===== 跑马灯 ===== -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track mono" id="tickerTrack"></div>
+  </div>
+
+  <!-- ===== 统计带 ===== -->
+  <section class="stats" aria-label="GitHub 数据统计">
+    <div class="container stats-grid">
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.repos">08</span><span class="stat-label mono">PUBLIC REPOS · 公开仓库</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.stars">05</span><span class="stat-label mono">STARS EARNED · 获得星标</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.followers">00</span><span class="stat-label mono">FOLLOWERS · 关注者</span></div>
+      <div class="stat reveal"><span class="stat-num mono" data-c="stats.since">2022.10</span><span class="stat-label mono">ON TERRA · 加入 GitHub</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 01 档案 ===== -->
+  <section class="sec" id="profile">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-index mono">01 / PROFILE</p>
+        <h2 class="sec-title"><span class="sec-cn">干员档案</span><span class="sec-en mono">OPERATOR FILE</span></h2>
+        <span class="sec-num mono" aria-hidden="true">01</span>
+      </header>
+      <div class="profile-grid">
+        <aside class="avatar-panel panel-corners reveal" id="avatarPanel" aria-label="干员肖像">
+          <p class="panel-tag mono">// 干员肖像 PORTRAIT</p>
+          <div class="portrait-frame" id="portraitFrame">
+            <img id="portraitImg" src="assets/img/avatar.svg" alt="干员肖像 PORTRAIT">
+            <span class="portrait-scan" aria-hidden="true"></span>
+            <button class="portrait-upload mono" id="portraitUpload" type="button" hidden aria-label="上传本地头像">▲ 上传图像<span>UPLOAD IMAGE</span></button>
+          </div>
+          <dl class="portrait-meta mono">
+            <div><dt>CODENAME</dt><dd data-c="identity.codename">PONM3AY</dd></div>
+            <div><dt>CLEARANCE</dt><dd data-c="identity.clearance">PUBLIC</dd></div>
+          </dl>
+          <p class="portrait-hint mono admin-only" id="portraitHint">* 解锁 ◆ ADMIN 后可从本地上传头像（自动压缩至 640px，仅本机生效）</p>
+          <input type="file" id="portraitFile" accept="image/*" hidden>
+        </aside>
+        <div class="profile-main">
+          <article class="panel bio-panel panel-corners reveal">
+          <p class="panel-tag mono">// 情报摘要 BRIEFING</p>
+          <h3 class="bio-title">Codename <b data-c="identity.codename">PONM3AY</b></h3>
+          <p class="bio-text" data-c="identity.bio">白天拆需求、写插件；晚上把日常动作自动化成脚本，然后 DeepSleep~zzz。专注 LLM agent 插件生态（DSH）、桌面自动化工具链与 CV 训练流水线 —— safeyolo、dsh-plugins、autoclaw-proxy 的维护者。</p>
+          <div class="bio-chips mono" id="bioChips">
+            <span class="chip">ROLE · 独立开发者</span>
+            <span class="chip">FOCUS · AGENT / TOOLS</span>
+            <span class="chip">AVAILABILITY · OPEN</span>
+          </div>
+        </article>
+        <article class="panel attrs-panel panel-corners reveal">
+          <p class="panel-tag mono">// 能力评估 ATTRIBUTES</p>
+          <p class="attrs-sub mono admin-only">自评示例 · 可在管理后台修改</p>
+          <div class="attr" id="attrsList"></div>
+        </article>
+        </div>
+      </div>
+      <article class="panel modules-panel reveal">
+        <div class="modules-head">
+          <p class="panel-tag mono">// 模块阵列 MODULES</p>
+          <p class="modules-count mono"><b id="modulesCount">10</b> LOADED</p>
+        </div>
+        <ul class="modules-grid mono" id="modulesList"></ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 02 作战 ===== -->
+  <section class="sec" id="operations">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-index mono">02 / OPERATIONS</p>
+        <h2 class="sec-title"><span class="sec-cn">作战记录</span><span class="sec-en mono">CASE FILES</span></h2>
+        <span class="sec-num mono" aria-hidden="true">02</span>
+      </header>
+      <div class="ops-pager mono reveal" aria-hidden="true">
+        <button class="ops-btn" id="opsPrev" type="button" aria-label="上一批项目">‹</button>
+        <span class="ops-counter"><i id="opsIdx">01</i> / <span id="opsTotal">06</span></span>
+        <button class="ops-btn" id="opsNext" type="button" aria-label="下一批项目">›</button>
+        <span class="ops-progress" aria-hidden="true"><i id="opsProgress"></i></span>
+      </div>
+      <div class="ops-viewport reveal" id="opsViewport" tabindex="0" aria-label="项目列表，可左右滚动">
+        <div class="ops-track" id="opsTrack"></div>
+      </div>
+      <article class="panel ops-index-panel reveal">
+        <div class="ops-index-head">
+          <p class="panel-tag mono">// 关联仓库 INDEX</p>
+          <a class="ops-all mono" href="https://github.com/ponm3ay?tab=repositories" target="_blank" rel="noopener">查看全部 8 REPOS ↗</a>
+        </div>
+        <ul class="ops-index mono" id="opsIndex"></ul>
+        <p class="ops-index-note mono">* DSH 生态附属仓库，随 dsh-plugins 一同维护与发版。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 03 日志 ===== -->
+  <section class="sec" id="log">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-index mono">03 / LOG</p>
+        <h2 class="sec-title"><span class="sec-cn">行动日志</span><span class="sec-en mono">TRACE LOG</span></h2>
+        <span class="sec-num mono" aria-hidden="true">03</span>
+      </header>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- ===== 04 建立连接 ===== -->
+  <section class="sec sec-connect" id="connect">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-index mono">04 / CONTACT</p>
+        <h2 class="sec-title"><span class="sec-cn">建立连接</span><span class="sec-en mono">CONTACT NODE</span></h2>
+        <span class="sec-num mono" aria-hidden="true">04</span>
+      </header>
+      <div class="connect-head reveal">
+        <p class="connect-kicker mono">CONTACT NODE / READY TO DISPATCH</p>
+        <p class="connect-title">建立连接，启动下一项任务。</p>
+        <p class="connect-sub">有 agent 插件、自动化脚本或工具类项目想合作？通过下方频道发起通讯。</p>
+      </div>
+      <div class="connect-grid" id="connectGrid">
+        <a class="connect-card panel-corners reveal" href="mailto:sevenmaples@163.com" id="channelMail">
+          <span class="cc-type mono">MAIL · 邮件</span>
+          <span class="cc-value" data-c="connect.mail">sevenmaples@163.com</span>
+          <span class="cc-arrow mono" aria-hidden="true">→</span>
+          <button class="cc-copy mono" type="button" data-copy="sevenmaples@163.com" aria-label="复制邮箱地址">COPY</button>
+        </a>
+        <a class="connect-card panel-corners reveal" href="https://github.com/ponm3ay" target="_blank" rel="noopener" id="channelGit">
+          <span class="cc-type mono">GITHUB · 代码库</span>
+          <span class="cc-value" data-c="connect.github">github.com/ponm3ay</span>
+          <span class="cc-arrow mono" aria-hidden="true">→</span>
+        </a>
+        <div class="connect-card connect-card-empty reveal">
+          <span class="cc-type mono">CHANNEL · 更多频道</span>
+          <span class="cc-value cc-todo">[待编辑 · 在管理后台补充 B站 / 博客 / 其他链接]</span>
+        </div>
+      </div>
+      <p class="connect-note mono reveal" data-c="connect.responseNote">RESPONSE TIME · 通常 24-48H · [待编辑：可写上你的响应习惯]</p>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <svg class="footer-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.2 21.6 6.7v10.6L12 22.8 2.4 17.3V6.7Z" fill="#111412" stroke="currentColor" stroke-width="1.5"/><polyline points="5.6,12.6 8.8,12.6 10.4,8.7 13.1,16.1 14.8,11 16.1,12.6 18.9,12.6" fill="none" stroke="#53ff18" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.4" cy="8.7" r="1" fill="#53ff18"/></svg>
+      <div class="footer-text mono">
+        <span data-c="footer.text">© 2026 PONM3AY ARCHIVE</span>
+        <span class="footer-note" data-c="footer.note">ORIGINAL INTERFACE / PUBLIC ARCHIVE NODE</span>
+      </div>
+    </div>
+    <div class="footer-right mono">
+      <button class="admin-entry" id="adminEntry" type="button" title="管理员控制台">◆ ADMIN</button>
+      <a class="footer-top" href="#top">BACK TO TOP ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== 管理后台 MODAL ===== -->
+<div class="admin-modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" hidden>
+  <div class="admin-backdrop" data-admin-close></div>
+  <div class="admin-box panel-corners">
+    <!-- 令牌验证步骤 -->
+    <div class="admin-step" id="adminStepToken">
+      <div class="admin-head">
+        <h3 class="admin-title mono" id="adminTitle">ADMIN CONSOLE // 认证</h3>
+        <button class="admin-x" type="button" data-admin-close aria-label="关闭">✕</button>
+      </div>
+      <p class="admin-hint">输入管理员令牌以解锁本页内容编辑。令牌只保存在站长手里；本站仅校验其 SHA-256 摘要。</p>
+      <form id="tokenForm">
+        <input class="admin-token-input mono" id="tokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="P3A-XXXX-XXXX-XXXX-XXXX" aria-label="管理员令牌">
+        <p class="admin-err mono" id="tokenErr" hidden>ACCESS DENIED · 令牌校验失败</p>
+        <button class="btn btn-solid admin-go" type="submit">验证并解锁<span class="btn-en mono">AUTH</span></button>
+      </form>
+    </div>
+    <!-- 编辑步骤 -->
+    <div class="admin-step" id="adminStepEdit" hidden>
+      <div class="admin-head">
+        <h3 class="admin-title mono" id="adminTitleEdit">ADMIN CONSOLE // 内容编辑</h3>
+        <button class="admin-x" type="button" data-admin-close aria-label="关闭">✕</button>
+      </div>
+      <p class="admin-hint admin-hint-live" id="adminLiveHint" hidden>● 本地编辑已启用：改动已保存到本浏览器（localStorage），仅本机可见。</p>
+      <p class="admin-hint">保存后仅对本浏览器生效；点击「发布到 GitHub」可直接提交到仓库并自动上线（首次需配置一次 GitHub 令牌，仅存本机）。</p>
+      <div class="admin-body" id="adminBody"></div>
+      <div class="pub-token mono" id="pubToken" hidden>
+        <p class="pub-token-title">// GITHUB 令牌（首次配置）</p>
+        <div class="pub-token-row">
+          <input class="f-input" id="ghTokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_… （细粒度令牌）">
+          <button class="f-add" id="ghTokenSave" type="button">保存令牌</button>
+        </div>
+        <p class="pub-token-help">创建方式：github.com → Settings → Developer settings → Fine-grained tokens → Generate：<br>① Repository access 选 <b>Only select repositories → ponm3ay/ponm3ay.github.io</b>；② Permissions → Contents → <b>Read and write</b>；③ 生成后粘贴到上面保存。令牌仅存于本浏览器 localStorage，可随时清除；泄露风险等于把该仓库写权限交给这台设备。</p>
+      </div>
+      <div class="pub-status mono" id="pubStatus" hidden></div>
+      <div class="admin-actions mono">
+        <button class="btn btn-solid" id="adminPublish" type="button">发布到 GitHub<span class="btn-en mono">PUBLISH</span></button>
+        <button class="btn btn-ghost" id="adminSave" type="button">保存到本浏览器<span class="btn-en mono">SAVE</span></button>
+        <button class="btn btn-ghost" id="adminExport" type="button">导出 content.json<span class="btn-en mono">EXPORT</span></button>
+        <button class="btn btn-ghost btn-danger" id="adminReset" type="button">恢复默认</button>
+        <button class="admin-logout mono" id="adminLogout" type="button">退出登录</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/app.min.js" defer></script>
+<script src="assets/js/admin.min.js" defer></script>
+
+
+
+
+
+
+</body>
+</html>
