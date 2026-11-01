@@ -13,6 +13,7 @@
 <link rel="preload" href="assets/fonts/chakra-petch-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/chakra-petch-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <style>
 :root{
   --ink:#0b0d12;
@@ -187,7 +188,7 @@ body{
 .cta.solid .orn{color:rgba(20,18,10,.55)}
 .cta.solid:hover{background:linear-gradient(120deg,#f8e4b6,#d4ac68);color:#141414;box-shadow:0 10px 44px rgba(232,197,124,.35)}
 /* 双层剪影：远层更淡 */
-.cityline.far{opacity:.28;bottom:16vh}
+.cityline.far{opacity:.42;bottom:16vh}
 .cityline.far svg{height:6vh}
 
 /* 响应式 */
@@ -384,7 +385,7 @@ html:not(.js) .d-reveal{opacity:1}
 </a>
 
 <main class="kv">
-  <p class="kicker"><b>AUTOMATION AS TIDE</b> · SCRIPTS · AGENTS</p>
+  <p class="kicker"><b>EST.2022</b> · GITHUB PAGES · OPEN FOR WORK</p>
   <h1 class="slogan">
     <span class="slogan-row"><span class="g">码织千务</span></span>
     <span class="slogan-row">潮涌万象</span>
@@ -562,6 +563,8 @@ html:not(.js) .d-reveal{opacity:1}
     });
   },{threshold:0.12});
   document.querySelectorAll('.d-reveal,.d-sec').forEach(function(el){io.observe(el)});
+  var tlEl=document.getElementById('dTimeline');
+  if(tlEl)io.observe(tlEl);
 })();
 </script>
 
