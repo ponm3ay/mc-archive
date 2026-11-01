@@ -130,7 +130,8 @@ button{font-family:inherit;cursor:pointer}
 .d-line{display:inline-block;width:130px;height:2px;background:linear-gradient(90deg,transparent,rgba(250,250,233,.6),transparent)}
 .d-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:22px}
 @media (max-width:920px){.d-grid{grid-template-columns:1fr}}
-.d-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:34px;position:relative;overflow:hidden;transition:border-color .25s,transform .3s var(--ease-out),box-shadow .3s}
+.d-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:34px;position:relative;overflow:hidden;background-image:linear-gradient(115deg,transparent 42%,rgba(232,197,124,.07) 50%,transparent 58%);background-size:230% 100%;background-position:130% 0;background-repeat:no-repeat;transition:background-position .95s var(--ease-out),border-color .25s,transform .3s var(--ease-out),box-shadow .3s}
+.d-card:hover{background-position:-70% 0}
 .d-card:hover{border-color:rgba(250,250,233,.4);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .d-tag{font-family:Consolas,monospace;font-size:10.5px;color:#fafaE9;opacity:.7;letter-spacing:.22em;margin-bottom:18px}
 .d-h{font-family:var(--serif);font-size:23px;font-weight:700;color:#fff;margin-bottom:14px}
@@ -163,7 +164,7 @@ button{font-family:inherit;cursor:pointer}
 .d-proj .pj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
 .d-proj .pj-tags span{font-size:10px;color:#e1e1e1;border:1px solid rgba(255,255,255,.2);padding:3px 11px;border-radius:999px}
 .d-proj .pj-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:14px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em}
-.d-proj .pj-foot a{color:#dfe6ec;transition:color .2s;padding:3px 0}
+.d-proj .pj-foot a{color:#dfe6ec;transition:color .2s;padding:12px 0 12px 8px}
 .d-proj .pj-foot a:hover{color:#fafaE9}
 /* 轨迹 */
 .d-timeline{position:relative;padding-left:36px}
@@ -203,11 +204,11 @@ button{font-family:inherit;cursor:pointer}
 .f-logo .ft{font-family:var(--serif);font-weight:900;font-size:24px;letter-spacing:.2em;color:var(--paper)}
 .f-logo .ft em{font-style:normal;color:var(--gold)}
 .f-links{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:34px}
-.f-links a{font-family:var(--serif);font-size:14px;letter-spacing:.22em;color:#cfc9ba;transition:color .25s;position:relative}
+.f-links a{font-family:var(--serif);font-size:14px;letter-spacing:.22em;color:#cfc9ba;transition:color .25s;position:relative;display:inline-block;padding:10px 8px}
 .f-links a::after{content:"";position:absolute;left:50%;right:50%;bottom:-4px;height:1.5px;background:var(--gold);transition:left .3s var(--ease-out),right .3s var(--ease-out)}
 .f-links a:hover{color:var(--gold-hi)}
 .f-links a:hover::after{left:0;right:0}
-.f-legal{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;text-align:center;font-family:Consolas,monospace;font-size:10.5px;color:#6b6862;letter-spacing:.16em;line-height:2}
+.f-legal{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;text-align:center;font-family:Consolas,monospace;font-size:10.5px;color:#83807a;letter-spacing:.16em;line-height:2}
 .f-legal .sep{color:var(--gold-deep);margin:0 10px}
 
 /* ===== 滚动编排 ===== */
@@ -219,7 +220,20 @@ html:not(.js) .d-reveal{opacity:1}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   html{scroll-behavior:auto}
+  .kv .eyebrow,.kv .slogan-row,.kv .tagline,.kv .date-tag,.kv .cta-row{opacity:1;transform:none}
+  .d-reveal,.d-tl{opacity:1;transform:none}
 }
+/* ===== 进场兜底：2.6s 后强制终态 ===== */
+html.reveal-done .kv .eyebrow,
+html.reveal-done .kv .slogan-row,
+html.reveal-done .kv .tagline,
+html.reveal-done .kv .date-tag,
+html.reveal-done .kv .cta-row,
+html.reveal-done .d-reveal,
+html.reveal-done .d-tl{opacity:1 !important;transform:none !important;animation:none !important}
+html.reveal-done .d-timeline .rail{transform:scaleY(1) !important}
+html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale(1) !important;animation:none !important}
+#profile,#works,#log,#connect{scroll-margin-top:70px}
 @media (max-width:900px){.top-links{display:none}}
 @media (max-width:760px){
   .top{padding:14px 20px}
@@ -514,7 +528,7 @@ html:not(.js) .d-reveal{opacity:1}
 (function(){
   var fillAttrs=function(){document.querySelectorAll('.attr-bar i').forEach(function(i){i.style.width=i.getAttribute('data-w')+'%'})};
   var tl=document.getElementById('dTimeline');
-  var topbar=document.getElementById('topbar');
+  var topbar=document.getElementById('topBar');
   function onScroll(){
     if(topbar){var gate=document.getElementById('profile')?document.getElementById('profile').offsetTop*0.7:400;topbar.classList.toggle('show',scrollY>gate)}
   }
@@ -542,6 +556,13 @@ html:not(.js) .d-reveal{opacity:1}
       if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
     });
   });
+  /* 进场兜底：2.6s 后强制全部终态（动画失败/截图/爬虫/任何异常保险） */
+  setTimeout(function(){
+    document.documentElement.classList.add('reveal-done');
+    document.querySelectorAll('.attr-bar i').forEach(function(i){
+      if(!i.style.width)i.style.width=i.getAttribute('data-w')+'%';
+    });
+  },2600);
 })();
 
 </script>
