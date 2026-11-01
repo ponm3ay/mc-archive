@@ -9,6 +9,15 @@
 **部署**: 新仓库 `ponm3ay/mc-archive` → https://ponm3ay.github.io/mc-archive/ （新网址，旧站未覆盖）。
 管理令牌（独立）：MC-QFDM-F5GH-CBGW-CPVM-Z28S（仅存 SHA-256 于 content.js）
 
+## Round M7（用户裁定后二次重做：衬线书法版）
+**用户反馈**: v2 仍是方舟风格的延续（mono/斜切/编号/终端感），要求真正的鸣潮气质。
+**实机研究**: 无头渲染 mc.kurogames.com 首页 → 确认它是**全屏金色 KV 宣传落地页**（"镜锁玄世 心契红尘"对仗标语 + 中式装饰按钮 + 立绘 KV），非资讯站。
+**重做**: 单屏沉浸 KV——**Noto Serif SC 900 衬线书法标语**「码织千务 · 潮涌万象」（金渐变+冷白双行）+ **红印章「漂」**盖章动画 + 胶囊双线按钮（实心金主 CTA + 描边副 CTA）+ 眉题金句 + 波浪分隔 + 衬线内容区（圆角大卡/胶囊标签）+ 衬线页脚。彻底移除：boot 终端/mono 标签/编号体系/斜切角/危险条纹/HUD 元素。
+**大 bug 抓获**: KV 全员隐形——**:root 漏定义 --ease-out**，所有 `animation: x var(--ease-out)` 整条声明失效（var 未定义 → 声明丢弃）。一行修复后全部复活。
+**线上**: `deeaebe` built ✓。
+**教训**: 自包含单文件引用外部变量必失效（须字面量）；无头浏览器环境 prefers-reduced-motion=false 正常，动画消失要查 var() 完整性。
+
+
 ## Round M3-M6（评审闭环 + P0 修复 + 顶栏补全）
 **第六期首轮评审（零上下文）**: FAIL——① 移动端整页大量内容不可见（reveal 渐进增强缺陷）② [待编辑] 泄漏 ③ Lightbox 裸 HTML（mc-case 样式首版遗漏）④ 徽章对齐/ghost 裁切等。
 **修复批次**: ① **渐进增强重构**（html.no-js 默认可见、JS 环境才隐藏渐显——爬虫/打印/截图/无 JS 全兜底）② 双视图规则补移植（:has 条件式）③ Lightbox 黑金样式补全 ④ 徽章并入头行 ⑤ ghost 字移动端缩小 ⑥ ARK SITE 大写统一 ⑦ desc 38em。
