@@ -174,13 +174,20 @@ body{
 .reel:hover .reel-track{animation-play-state:paused}
 .reel a{
   display:inline-flex;align-items:center;gap:10px;padding:2px 26px;text-decoration:none;
-  font-family:Consolas,monospace;font-size:11.5px;color:var(--mist);letter-spacing:.2em;white-space:nowrap;
+  font-family:Consolas,monospace;font-size:12px;color:#c9c5b8;letter-spacing:.2em;white-space:nowrap;
   transition:color .2s;
 }
 .reel a:hover{color:var(--gold)}
 .reel a b{color:var(--paper);font-weight:400}
 .reel .d{color:var(--gold-deep)}
 @keyframes reel{to{transform:translateX(-50%)}}
+/* 实心金主 CTA */
+.cta.solid{background:linear-gradient(120deg,#f4dca8 0%,#e8c57c 45%,#c9a063 100%);color:#141414}
+.cta.solid .orn{color:rgba(20,18,10,.55)}
+.cta.solid:hover{background:linear-gradient(120deg,#f8e4b6,#d4ac68);color:#141414;box-shadow:0 10px 44px rgba(232,197,124,.35)}
+/* 双层剪影：远层更淡 */
+.cityline.far{opacity:.28;bottom:16vh}
+.cityline.far svg{height:6vh}
 
 /* 响应式 */
 @media (max-width:760px){
@@ -190,6 +197,8 @@ body{
   .lobby{right:18px;bottom:64px}
   .cta-row{gap:14px}
   .cta{min-width:min(280px,86vw);padding:15px 22px}
+  .kicker{letter-spacing:.3em;text-indent:.3em}
+  .tagline{letter-spacing:.28em;text-indent:.28em}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
@@ -201,6 +210,9 @@ body{
   <div class="vortex"></div>
   <div class="beams"></div>
   <div class="ground"></div>
+  <div class="cityline far">
+    <svg viewBox="0 0 1600 90" preserveAspectRatio="none"><path d="M0 90V58h60v-18h50v18h44V30h70v28h36V20h60v38h40V36h56v26h40V24h64v38h44V34h60v28h36V22h70v40h40V36h56v26h44V30h60v32h36V22h64v40h40V34h56v28h44V26h60v36h40V36h56v26h44V30h60v32h36V24h64v38h44V36h56v26h40V30h60v32h36V24h64v38h44V36h56v26h40V32h60v30h36V26h64v36h40V34h56v28h44V28h60v34h40V38h56v24h44V32h60v30h36V26h64v36h40V34h56v26h44V30h60v32h36V24h64v38h40V36h56v26h44V30h60v30h36V26h64v36h40V34h50V90Z" fill="#0b0d12"/></svg>
+  </div>
   <div class="cityline">
     <svg viewBox="0 0 1600 90" preserveAspectRatio="none">
       <path d="M0 90V62h38v-14h30v14h26V40h44v22h20V30h56v32h30V18h40v14h24V44h50V26h36v18h28V12h48v34h26V40h38v22h24V28h52v18h30V16h42v30h26V38h36v24h28V22h46v24h30V34h40v28h24V44h34v18h30V30h44v32h26V42h38v20h30V26h50v36h28V38h40v24h26V30h44v32h30V40h36v22h30V28h46v34h28V38h40v24h30V30h42v32h26V40h38v22h30V28h44v34h26V42h38v20h32V30h46v32h28V40h40v22h28V32h44v30h28V42h38v20h32V34h44v28h30V44h38v18h30V36h44v26h28V44h38v18h32V40h44v22h30V34h40v28h26V44h38v20h30V32h44v28h28V44h38v18h32V38h44v24h30V46h38v16h30V42h44v20h28V36h40v26h26V46h38v16h30V42h44v20h28V36h40v26h26V44h38v18h30V40h44v22h28V36h40v24h26V44h38v18h30V40h44v22h28V36h40v26h24V46h38v16h30V42h44v16h22V90Z" fill="#0a0c11" stroke="rgba(232,197,124,.28)" stroke-width="1"/>
@@ -228,7 +240,7 @@ body{
 </a>
 
 <main class="kv">
-  <p class="kicker">KURO STYLE LANDING · <b>AUTOMATION AS TIDE</b></p>
+  <p class="kicker"><b>AUTOMATION AS TIDE</b> · SCRIPTS · AGENTS</p>
   <h1 class="slogan">
     <span class="slogan-row"><span class="g">码织千务</span></span>
     <span class="slogan-row">潮涌万象</span>
@@ -236,8 +248,8 @@ body{
   <p class="tagline">AUTOMATION · <em>SCRIPTS</em> · AGENTS</p>
   <p class="date-tag"><b>2026</b> · DEEP SLEEP 之外，另有岸边</p>
   <div class="cta-row">
-    <a class="cta" href="https://github.com/ponm3ay?tab=repositories" target="_blank" rel="noopener">
-      <span class="orn">✦</span>GITHUB · 仓库总览<span class="orn">✦</span>
+    <a class="cta solid" href="https://github.com/ponm3ay?tab=repositories" target="_blank" rel="noopener">
+      <span class="orn dark">✦</span>GITHUB · 仓库总览<span class="orn dark">✦</span>
     </a>
     <a class="cta ghost" href="mailto:sevenmaples@163.com">
       <span class="orn">✦</span>MAIL · 建立连接<span class="orn">✦</span>
