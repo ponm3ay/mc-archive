@@ -73,7 +73,7 @@ body{
 .enter{
   position:fixed;right:34px;top:30px;z-index:20;display:flex;align-items:center;gap:10px;
   font-family:Consolas,monospace;font-size:11.5px;letter-spacing:.24em;color:var(--paper);
-  border:1px solid rgba(232,197,124,.55);padding:9px 20px;background:rgba(10,11,15,.45);
+  border:1px solid rgba(232,197,124,.55);padding:11px 20px;background:rgba(10,11,15,.45);
   clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
   transition:.25s;text-decoration:none;
 }
@@ -166,15 +166,16 @@ body{
 
 /* 底部滚动跑马灯：微缩作品条 */
 .reel{
-  position:fixed;left:0;right:0;bottom:0;z-index:15;
-  border-top:1px solid rgba(232,197,124,.25);background:rgba(8,9,12,.55);backdrop-filter:blur(6px);
-  overflow:hidden;padding:10px 0;
+  position:relative;z-index:10;
+  border-top:1px solid rgba(232,197,124,.25);border-bottom:1px solid rgba(232,197,124,.25);
+  background:rgba(8,9,12,.55);
+  overflow:hidden;padding:12px 0;
 }
 .reel-track{display:flex;gap:0;width:max-content;animation:reel 36s linear infinite}
 .reel:hover .reel-track{animation-play-state:paused}
 .reel a{
   display:inline-flex;align-items:center;gap:10px;padding:2px 26px;text-decoration:none;
-  font-family:Consolas,monospace;font-size:12px;color:#c9c5b8;letter-spacing:.2em;white-space:nowrap;
+  font-family:Consolas,monospace;font-size:12px;color:#c9c5b8;letter-spacing:.2em;white-space:nowrap;padding:9px 26px;
   transition:color .2s;
 }
 .reel a:hover{color:var(--gold)}
@@ -192,7 +193,7 @@ body{
 /* 响应式 */
 @media (max-width:760px){
   .brand{left:18px;top:16px}
-  .enter{right:18px;top:18px;padding:8px 14px;font-size:10.5px;letter-spacing:.14em}
+  .enter{right:18px;top:18px;padding:11px 14px;font-size:10.5px;letter-spacing:.14em}
   .plate{left:18px;bottom:64px}
   .lobby{right:18px;bottom:64px}
   .cta-row{gap:14px}
@@ -203,6 +204,135 @@ body{
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
 }
+
+/* ===== 滚动后滑入顶栏 ===== */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:110;
+  background:rgba(16,22,30,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(250,250,233,.14);
+  transform:translateY(-100%);transition:transform .45s var(--ease-out);
+}
+.topbar.show{transform:translateY(0)}
+.topbar-inner{width:min(1150px,100% - 48px);margin-inline:auto;display:flex;align-items:center;gap:26px;height:54px}
+.tb-brand{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--paper)}
+.tb-brand b{color:var(--gold)}
+.tb-links{display:flex;gap:4px;margin:0 auto}
+.tb-links a{font-size:12px;color:#c8d0d8;padding:8px 14px;letter-spacing:.14em;transition:color .2s,background .2s}
+.tb-links a:hover{color:#fafaE9;background:rgba(250,250,233,.08)}
+.tb-admin{margin-left:auto;background:none;border:1px solid rgba(250,250,233,.3);color:#c8d0d8;font-size:10px;letter-spacing:.2em;padding:7px 15px;transition:.25s;clip-path:var(--clip-sm)}
+.tb-admin:hover{color:#fafaE9;border-color:#fafaE9;background:rgba(250,250,233,.08)}
+
+/* ===== 滚动后滑入顶栏 ===== */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:110;
+  background:rgba(16,22,30,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(250,250,233,.14);
+  transform:translateY(-100%);transition:transform .45s var(--ease-out);
+}
+.topbar.show{transform:translateY(0)}
+.topbar-inner{width:min(1150px,100% - 48px);margin-inline:auto;display:flex;align-items:center;gap:26px;height:54px}
+.tb-brand{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--paper)}
+.tb-brand b{color:var(--gold)}
+.tb-links{display:flex;gap:4px;margin:0 auto}
+.tb-links a{font-size:12px;color:#c8d0d8;padding:8px 14px;letter-spacing:.14em;transition:color .2s,background .2s}
+.tb-links a:hover{color:#fafaE9;background:rgba(250,250,233,.08)}
+.tb-admin{margin-left:auto;background:none;border:1px solid rgba(250,250,233,.3);color:#c8d0d8;font-size:10px;letter-spacing:.2em;padding:7px 15px;transition:.25s;clip-path:var(--clip-sm)}
+.tb-admin:hover{color:#fafaE9;border-color:#fafaE9;background:rgba(250,250,233,.08)}
+
+/* ===== 深蓝灰内容区（鸣潮主站 UI 语言） ===== */
+.deep{
+  position:relative;z-index:10;
+  background:linear-gradient(180deg,#1a2431 0%,#2c3e50 14%,#2c3e50 86%,#1a2431 100%);
+}
+.deep::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;
+  background:linear-gradient(180deg,rgba(11,13,18,.9),transparent);pointer-events:none}
+.d-wrap{width:min(1150px,100% - 48px);margin-inline:auto}
+.d-sec{padding:96px 0 36px;position:relative}
+.d-head{text-align:center;margin-bottom:56px}
+.d-kicker{font-size:11px;color:#fafaE9;opacity:.62;letter-spacing:.42em}
+.d-title{font-size:clamp(30px,4.6vw,52px);font-weight:700;letter-spacing:.14em;color:#fff;margin:12px 0 18px}
+.d-line{display:inline-block;width:130px;height:2px;background:linear-gradient(90deg,transparent,rgba(250,250,233,.65),transparent)}
+.d-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+@media (max-width:920px){.d-grid{grid-template-columns:1fr}}
+.d-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);
+  padding:30px;position:relative;overflow:hidden;
+  background-image:linear-gradient(115deg,transparent 42%,rgba(250,250,233,.05) 50%,transparent 58%);
+  background-size:230% 100%;background-position:130% 0;background-repeat:no-repeat;
+  transition:background-position .95s var(--ease-out),border-color .25s,transform .3s var(--ease-out);
+}
+.d-card:hover{background-position:-70% 0;border-color:rgba(250,250,233,.38);transform:translateY(-3px)}
+.d-tag{font-size:10.5px;color:#fafaE9;opacity:.72;letter-spacing:.22em;margin-bottom:16px}
+.d-h{font-size:22px;font-weight:600;color:#fff;margin-bottom:12px}
+.d-h b{color:#fafaE9}
+.d-sub{font-size:12px;color:#b9b9b9;margin-left:12px;font-weight:400;letter-spacing:.1em}
+.d-text{color:#c8d0d8;font-size:15px;line-height:2.05;margin-bottom:16px}
+.d-chips{display:flex;flex-wrap:wrap;gap:8px}
+.d-chips span{font-size:11px;color:#e1e1e1;border:1px solid rgba(255,255,255,.18);padding:4px 12px}
+.d-attrs{display:flex;flex-direction:column;gap:19px;margin-top:6px}
+.attr-row{display:grid;grid-template-columns:minmax(110px,auto) 1fr 40px;align-items:center;gap:12px}
+.attr-name{font-size:11px;color:#c8d0d8;letter-spacing:.1em;white-space:nowrap}
+.attr-bar{height:5px;background:rgba(255,255,255,.13);position:relative;overflow:hidden}
+.attr-bar i{position:absolute;inset:0;right:auto;width:0;background:linear-gradient(90deg,#fafaE9,var(--gold));transition:width 1.2s var(--ease-out)}
+.attr-val{font-size:12px;color:#fafaE9;text-align:right;font-weight:600}
+.d-mods{margin-top:20px}
+.d-mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1)}
+.d-mods-grid li{background:#31445a;padding:14px 16px;font-size:12px;color:#dfe6ec;display:flex;gap:10px;align-items:center;position:relative;overflow:hidden;transition:background .25s,color .25s}
+.d-mods-grid li::before{content:"◆";color:#fafaE9;opacity:.5;font-size:8px}
+.d-mods-grid li::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:24%;background:linear-gradient(100deg,transparent,rgba(250,250,233,.14),transparent);transform:skewX(-12deg);transition:left .5s var(--ease-out)}
+.d-mods-grid li:hover{background:#3a5069;color:#fff}
+.d-mods-grid li:hover::after{left:106%}
+.d-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+.d-proj{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);padding:26px;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s;
+}
+.d-proj:hover{transform:translateY(-5px);border-color:rgba(250,250,233,.4);box-shadow:0 18px 44px rgba(0,0,0,.35)}
+.d-proj .pj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.d-proj .pj-no{font-family:Consolas,monospace;font-size:11px;color:#fafaE9;opacity:.75;letter-spacing:.2em}
+.d-proj .pj-lang{font-family:Consolas,monospace;font-size:9.5px;color:#fafaE9;opacity:.6;letter-spacing:.18em;border:1px solid rgba(250,250,233,.3);padding:3px 9px}
+.d-proj h3{font-family:var(--f-disp);font-size:19px;font-weight:600;color:#fff;margin-bottom:10px}
+.d-proj h3 a{display:inline-block;transition:color .2s;padding:6px 0}
+.d-proj h3 a:hover{color:#fafaE9}
+.d-proj p{font-size:13px;color:#c8d0d8;line-height:1.9;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.d-proj .pj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.d-proj .pj-tags span{font-size:10px;color:#e1e1e1;border:1px solid rgba(255,255,255,.18);padding:3px 10px}
+.d-proj .pj-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;font-size:10px;color:#b9b9b9;letter-spacing:.12em}
+.d-proj .pj-foot a{display:inline-block;color:#dfe6ec;transition:color .2s;padding:11px 0 11px 8px}
+.d-proj .pj-foot a:hover{color:#fafaE9}
+.d-timeline{position:relative;padding-left:34px}
+.d-timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,#fafaE9,rgba(250,250,233,.25) 90px,rgba(255,255,255,.14) 160px,rgba(255,255,255,.14))}
+.d-tl{position:relative;padding:0 0 32px 22px;opacity:0;transform:translateX(-16px);transition:opacity .6s var(--ease-out) calc(var(--i)*90ms + .2s),transform .6s var(--ease-out) calc(var(--i)*90ms + .2s)}
+.deep.in .d-tl,.d-timeline.grown .d-tl{opacity:1;transform:none}
+.d-tl::before{content:"";position:absolute;left:-30px;top:7px;width:9px;height:9px;background:#2c3e50;border:1.5px solid #fafaE9;transform:rotate(45deg);transition:transform .3s var(--ease-out),box-shadow .3s}
+.d-tl:hover::before{transform:rotate(45deg) scale(1.55);box-shadow:0 0 12px rgba(250,250,233,.55)}
+.d-tl:hover .d-tl-title{color:#fafaE9}
+.d-tl-date{font-family:Consolas,monospace;font-size:11.5px;color:#fafaE9;opacity:.85;letter-spacing:.18em;margin-bottom:6px}
+.d-tl-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.d-tl-title{font-family:var(--f-disp);font-size:18px;font-weight:600;color:#fff;transition:color .2s}
+.d-tl-status{font-size:9.5px;letter-spacing:.16em;padding:3px 10px;border:1px solid rgba(255,255,255,.25);color:#c8d0d8}
+.d-tl-status.st-gold{color:#fafaE9;border-color:rgba(250,250,233,.5);background:rgba(250,250,233,.08)}
+.d-tl-status.st-cyan{color:#7ee0d2;border-color:rgba(126,224,210,.4);background:rgba(126,224,210,.08)}
+.d-tl-text{font-size:13.5px;color:#c8d0d8;line-height:1.95;max-width:56em;overflow-wrap:anywhere}
+.d-links{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.d-links{grid-template-columns:1fr}}
+.d-link{
+  display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.13);padding:24px 28px;position:relative;overflow:hidden;
+  transition:border-color .25s,transform .3s var(--ease-out),background .3s;
+}
+.d-link::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#fafaE9 0 30px,transparent 30px);transition:background 0s}
+.d-link:hover{border-color:rgba(250,250,233,.4);transform:translateY(-4px);background:rgba(255,255,255,.08)}
+.d-link:hover::before{background:#fafaE9}
+.d-link b{font-size:12px;color:#fafaE9;letter-spacing:.2em}
+.d-link span{font-family:var(--f-disp);font-size:clamp(16px,2vw,20px);font-weight:600;color:#fff}
+.d-link i{margin-left:auto;font-style:normal;font-size:19px;color:#fafaE9;opacity:.6;transition:transform .3s var(--ease-out),opacity .3s}
+.d-link:hover i{transform:translateX(7px);opacity:1}
+/* 编排 */
+html.js .d-reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+html.js .d-reveal.in{opacity:1;transform:none}
+html:not(.js) .d-reveal{opacity:1}
 </style>
 </head>
 <body>
@@ -221,6 +351,20 @@ body{
 </div>
 <canvas id="dust" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
+
+<!-- 滚动后滑入顶栏 -->
+<div class="topbar mono" id="topbar">
+  <div class="topbar-inner">
+    <span class="tb-brand">PONM<b>3</b>AY</span>
+    <nav class="tb-links">
+      <a href="#profile">总结</a>
+      <a href="#projects">项目</a>
+      <a href="#dlog">轨迹</a>
+      <a href="#dconnect">连接</a>
+    </nav>
+    <a class="tb-admin" href="https://github.com/ponm3ay" target="_blank" rel="noopener">GITHUB ↗</a>
+  </div>
+</div>
 
 <header class="brand">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 16 4l12 20H4Z" fill="none" stroke="#e8c57c" stroke-width="2.4" stroke-linejoin="round"/><path d="M10.5 24 16 14.5 21.5 24h-11Z" fill="#e8c57c"/></svg>
@@ -257,11 +401,189 @@ body{
   </div>
 </main>
 
+<!-- ===== 深蓝灰内容区（鸣潮主站 UI 语言） ===== -->
+<div class="deep">
+  <!-- 漂泊者总结 + 能力评分 -->
+  <section class="d-sec" id="profile">
+    <div class="d-wrap">
+      <div class="d-head reveal">
+        <span class="d-kicker mono">DRIFTER FILE · 漂泊者档案</span>
+        <h2 class="d-title">总结与能力评估</h2>
+        <span class="d-line" aria-hidden="true"></span>
+      </div>
+      <div class="d-grid">
+        <article class="d-card reveal">
+          <p class="d-tag mono">// RESONANCE · 情报总结</p>
+          <h3 class="d-h">Codename <b>PONM3AY</b> <span class="d-sub mono">gugu · 漂泊者</span></h3>
+          <p class="d-text">白天拆需求、写插件；晚上把日常动作自动化成脚本，然后 DeepSleep~zzz。专注 LLM agent 插件生态（DSH）、桌面自动化工具链与 CV 训练流水线——safeyolo、dsh-plugins、autoclaw-proxy 的维护者。</p>
+          <div class="d-chips mono" id="dChips"></div>
+        </article>
+        <article class="d-card reveal">
+          <p class="d-tag mono">// ABILITY · 能力评分</p>
+          <div class="d-attrs" id="dAttrs"></div>
+        </article>
+      </div>
+      <div class="d-mods reveal">
+        <p class="d-tag mono">// MODULES · 共鸣链</p>
+        <ul class="d-mods-grid mono" id="dModules"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目展示 -->
+  <section class="d-sec d-alt" id="projects">
+    <div class="d-wrap">
+      <div class="d-head reveal">
+        <span class="d-kicker mono">PROJECTS · 项目展示</span>
+        <h2 class="d-title">项目与总结</h2>
+        <span class="d-line" aria-hidden="true"></span>
+      </div>
+      <div class="d-cards" id="dCards"></div>
+    </div>
+  </section>
+
+  <!-- 时间线 -->
+  <section class="d-sec" id="dlog">
+    <div class="d-wrap">
+      <div class="d-head reveal">
+        <span class="d-kicker mono">TRACE · 轨迹</span>
+        <h2 class="d-title">行动记录</h2>
+        <span class="d-line" aria-hidden="true"></span>
+      </div>
+      <div class="d-timeline" id="dTimeline"></div>
+    </div>
+  </section>
+
+  <!-- 连接 -->
+  <section class="d-sec d-alt" id="dconnect">
+    <div class="d-wrap">
+      <div class="d-head reveal">
+        <span class="d-kicker mono">LINK · 连接</span>
+        <h2 class="d-title">建立连接</h2>
+        <span class="d-line" aria-hidden="true"></span>
+      </div>
+      <div class="d-links">
+        <a class="d-link reveal" href="mailto:sevenmaples@163.com">
+          <b class="mono">MAIL</b><span>sevenmaples@163.com</span><i class="mono">→</i>
+        </a>
+        <a class="d-link reveal" href="https://github.com/ponm3ay" target="_blank" rel="noopener">
+          <b class="mono">GITHUB</b><span>github.com/ponm3ay</span><i class="mono">→</i>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="reel" aria-hidden="true">
+  <div class="reel-track" id="reelTrack"></div>
+</div>
+
 <div class="reel" aria-hidden="true">
   <div class="reel-track" id="reelTrack"></div>
 </div>
 
 <script>
+/* ===== 深蓝灰内容区：数据 + 渲染 ===== */
+(function(){
+  var DATA={
+    chips:['漂泊者 · 独立开发者','共鸣 · AGENT / TOOLS','状态 · OPEN FOR WORK'],
+    attrs:[
+      {n:'BUILD SPEED · 建造速度',v:88},{n:'DEBUG DEPTH · 调试深度',v:84},
+      {n:'UI TASTE · 界面审美',v:76},{n:'AUTOMATION · 自动化',v:90}
+    ],
+    modules:['Python','JavaScript','Node.js','PowerShell','YOLO / CV','LLM Agents','DSH 插件开发','Windows 自动化','Git / CI','OpenAI 兼容 API'],
+    projects:[
+      {no:'OP-01',t:'safeyolo',lang:'PYTHON',st:'PUBLISHED',d:'基于 Ultralytics YOLO 的安全帽 / 反光衣穿戴检测训练工具：标注格式转换、数据集划分、训练与指标记录、评估与推理一体化 CLI，覆盖从原始标注到模型部署的完整流程。',tags:['Python','YOLO','CV'],meta:'★ 5 · MIT',u:'https://github.com/ponm3ay/safeyolo'},
+      {no:'OP-02',t:'dsh-plugins',lang:'JAVASCRIPT',st:'ACTIVE',d:'DeepSeek Harness（DSH）插件集：按任务给不同模型派活的「辅助模型」槽位、跨会话长期记忆、子代理用量显示、界面背景与供应商染色。不改本体源码，每个插件可独立装卸。',tags:['JavaScript','DSH','Plugin'],meta:'5 PLUGINS IN ONE',u:'https://github.com/ponm3ay/dsh-plugins'},
+      {no:'OP-03',t:'autoclaw-proxy',lang:'NODE.JS',st:'ACTIVE',d:'把 AutoClaw（澳龙）桌面客户端的 GLM 模型额度封装成本地 OpenAI 兼容 API 端点：支持 SSE 流式与 tool_calls，凭据经 DPAPI 热提取自动续期，零依赖纯 Node.js 标准库，克隆即跑。',tags:['Node.js','OpenAI API','Proxy'],meta:'ZERO-DEP',u:'https://github.com/ponm3ay/autoclaw-proxy'},
+      {no:'OP-04',t:'dsh-bilibili-afygbot',lang:'NODE.JS',st:'FIELD TEST',d:'把 B 站鸣潮凹分（椰果）视频沉淀成结构化、可联邦、可被 agent 调用的数据：append-only jsonl + 只读 HTTP 接口，记录 id 全局唯一。',tags:['Node.js','Data Layer'],meta:'EARLY PREVIEW',u:'https://github.com/ponm3ay/dsh-bilibili-afygbot'},
+      {no:'OP-05',t:'trae-cn-patcher',lang:'POWERSHELL',st:'STABLE',d:'Trae CN IDE 微插件：一键屏蔽「工作区位于安装文件夹」告警横幅，并同步完整性校验避免「安装损坏」提示。零依赖三段式。',tags:['PowerShell','IDE Patch'],meta:'ZERO-DEP',u:'https://github.com/ponm3ay/trae-cn-patcher'},
+      {no:'OP-06',t:'traework-auto-checkin',lang:'NODE.JS',st:'AUTOMATED',d:'TRAE / TraeWork CN 每日自动签到：零依赖 Node.js + Windows 计划任务，打开 IDE 即自动领取签到积分。',tags:['Node.js','Scheduler'],meta:'DAILY RUN',u:'https://github.com/ponm3ay/traework-auto-checkin'},
+      {no:'OP-07',t:'dsh-aux-models',lang:'JAVASCRIPT',st:'STABLE',d:'DSH 设置页「辅助模型」面板：按任务选择辅助模型，选型落盘机器可读槽位表供其它插件读取。',tags:['JavaScript','DSH'],meta:'DSH ECOSYSTEM',u:'https://github.com/ponm3ay/dsh-aux-models'},
+      {no:'OP-08',t:'dsh-provider-accent',lang:'JAVASCRIPT',st:'STABLE',d:'DSH model picker 供应商标题高亮：高对比与每供应商强调色。',tags:['JavaScript','DSH'],meta:'DSH ECOSYSTEM',u:'https://github.com/ponm3ay/dsh-provider-accent'}
+    ],
+    log:[
+      {d:'2026.10',t:'dsh 插件矩阵成型',s:'ACTIVE',x:'dsh-plugins / dsh-aux-models / dsh-provider-accent 连续发版：模型派活、跨会话长期记忆、子代理用量显示链路稳定运行。'},
+      {d:'2026.10',t:'autoclaw-proxy 开放',s:'PUBLISHED',x:'GLM 额度反代封装为 OpenAI 兼容端点：SSE 流式 + tool_calls 全通过，凭据自愈机制上线。'},
+      {d:'2025.07',t:'safeyolo 开源',s:'★ 5',x:'YOLO 安全帽 / 反光衣检测训练工具开源：标注 → 训练 → 部署全流程覆盖，CI 全绿。'},
+      {d:'2022.10',t:'账号建立',s:'ARCHIVED',x:'GitHub 账号 ponm3ay 注册。漂泊者开始积累作战记录。'}
+    ]
+  };
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  // chips
+  var ch=document.getElementById('dChips');
+  if(ch)ch.innerHTML=DATA.chips.map(function(c){return '<span>'+esc(c)+'</span>'}).join('');
+  // attrs
+  var at=document.getElementById('dAttrs');
+  if(at)at.innerHTML=DATA.attrs.map(function(a){
+    return '<div class="attr-row"><span class="attr-name">'+esc(a.n)+'</span><span class="attr-bar"><i data-w="'+a.v+'"></i></span><span class="attr-val">'+a.v+'</span></div>';
+  }).join('');
+  // modules
+  var mo=document.getElementById('dModules');
+  if(mo)mo.innerHTML=DATA.modules.map(function(m){return '<li>'+esc(m)+'</li>'}).join('');
+  var mc=document.getElementById('dModulesCount');
+  if(mc)mc.textContent=String(DATA.modules.length).padStart(2,'0');
+  // projects
+  var pc=document.getElementById('dCards');
+  if(pc)pc.innerHTML=DATA.projects.map(function(o,i){
+    return '<article class="d-proj d-reveal" style="--i:'+i+'">'+
+      '<div class="pj-top"><span class="pj-no">'+esc(o.no)+'</span><span class="pj-lang">'+esc(o.lang)+'</span></div>'+
+      '<h3><a href="'+esc(o.u)+'" target="_blank" rel="noopener">'+esc(o.t)+'</a></h3>'+
+      '<p>'+esc(o.d)+'</p>'+
+      '<div class="pj-tags">'+o.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join('')+'</div>'+
+      '<div class="pj-foot"><span>'+esc(o.meta)+'</span><a href="'+esc(o.u)+'" target="_blank" rel="noopener">OPEN REPO ↗</a></div></article>';
+  }).join('');
+  // timeline
+  var tl=document.getElementById('dTimeline');
+  if(tl)tl.innerHTML+=DATA.log.map(function(l,i){
+    return '<div class="d-tl" style="--i:'+i+'"><p class="d-tl-date">'+esc(l.d)+'</p>'+
+      '<div class="d-tl-head"><h3 class="d-tl-title">'+esc(l.t)+'</h3><span class="d-tl-status">'+esc(l.s)+'</span></div>'+
+      '<p class="d-tl-text">'+esc(l.x)+'</p></div>';
+  }).join('');
+})();
+
+/* 编排：进入视口触发 reveal/grown/attr 填充 */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.d-reveal').forEach(function(e){e.classList.add('in')});
+    var tl=document.getElementById('dTimeline');if(tl)tl.classList.add('grown');
+    document.querySelectorAll('.attr-bar i').forEach(function(i){i.style.width=i.getAttribute('data-w')+'%'});
+    return;
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      en.target.classList.add('in');
+      if(en.target.id==='dTimeline')en.target.classList.add('grown');
+      if(en.target.classList.contains('d-sec')){
+        en.target.querySelectorAll('.attr-bar i').forEach(function(i){i.style.width=i.getAttribute('data-w')+'%'});
+      }
+      io.unobserve(en.target);
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.d-reveal,.d-sec').forEach(function(el){io.observe(el)});
+})();
+</script>
+
+<script>
+/* 顶栏滑入 + 锚点平滑 */
+(function(){
+  var tb=document.getElementById('topbar');
+  if(!tb)return;
+  var hero=document.querySelector('.kv');
+  function onScroll(){
+    var gate=hero?hero.offsetHeight*0.72:400;
+    tb.classList.toggle('show',window.scrollY>gate);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.querySelectorAll('.tb-links a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+
 /* 微缩作品条 */
 (function(){
   var items=[
