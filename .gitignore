@@ -1,1 +1,6 @@
+_qa/
+_research/
 .mimosa/
+node_modules/
+*.log
+Thumbs.db
