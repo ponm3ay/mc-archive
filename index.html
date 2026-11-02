@@ -140,7 +140,12 @@ button{font-family:inherit;cursor:pointer}
 .d-text{color:#c8d0d8;font-size:15px;line-height:2.1;margin-bottom:18px}
 .d-chips{display:flex;flex-wrap:wrap;gap:8px}
 .d-chips span{font-size:11px;color:#e1e1e1;border:1px solid rgba(255,255,255,.2);padding:4px 13px;border-radius:999px}
-.d-attrs{display:flex;flex-direction:column;gap:20px;margin-top:8px}
+.d-attrs{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+/* 能力块：hover/focus 展开故事行 */
+.attr-blk{outline:none;border-left:2px solid transparent;padding-left:10px;margin-left:-12px;transition:border-color .3s,padding .3s var(--ease-out),background .3s;border-radius:0 8px 8px 0}
+.attr-blk:hover,.attr-blk:focus-visible{border-left-color:var(--gold);background:rgba(232,197,124,.05);padding-left:14px}
+.attr-note{max-height:0;overflow:hidden;opacity:0;transition:max-height .45s var(--ease-out),opacity .35s,margin .35s;font-size:12px;color:var(--gold);opacity:0;line-height:1.8;letter-spacing:.02em}
+.attr-blk:hover .attr-note,.attr-blk:focus-visible .attr-note{max-height:60px;opacity:.9;margin-top:6px}
 .attr-row{display:grid;grid-template-columns:minmax(110px,auto) 1fr 40px;align-items:center;gap:12px}
 .attr-name{font-size:11.5px;color:#c8d0d8;letter-spacing:.1em;white-space:nowrap}
 .attr-bar{height:6px;background:rgba(255,255,255,.13);border-radius:999px;position:relative;overflow:hidden}
@@ -148,9 +153,12 @@ button{font-family:inherit;cursor:pointer}
 .attr-val{font-size:12.5px;color:#fafaE9;text-align:right;font-weight:600}
 .d-mods{margin-top:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:26px;backdrop-filter:blur(4px)}
 .d-mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.d-mods-grid li{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:13px 16px;font-size:12.5px;color:#dfe6ec;display:flex;gap:10px;align-items:center;transition:.25s;list-style:none}
-.d-mods-grid li::before{content:"◆";color:var(--gold);opacity:.55;font-size:8px}
-.d-mods-grid li:hover{border-color:rgba(232,197,124,.5);color:#fff;transform:translateY(-2px)}
+.d-mods-grid li{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:13px 16px;font-size:12.5px;color:#dfe6ec;display:flex;flex-direction:column;gap:0;align-items:flex-start;transition:.25s;list-style:none;outline:none;cursor:default}
+.d-mods-grid li>b{display:flex;gap:10px;align-items:center;font-weight:400}
+.d-mods-grid li>b::before{content:"◆";color:var(--gold);opacity:.55;font-size:8px}
+.d-mods-grid li .mod-x{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s var(--ease-out),opacity .3s;font-size:11px;color:var(--gold);line-height:1.7}
+.d-mods-grid li:hover,.d-mods-grid li:focus-visible{border-color:rgba(232,197,124,.5);color:#fff;transform:translateY(-2px)}
+.d-mods-grid li:hover .mod-x,.d-mods-grid li:focus-visible .mod-x{max-height:48px;opacity:.85;margin-top:6px}
 .d-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px}
 /* 项目卡：概要态（二级展开入口） */
 .d-proj{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:26px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s}
@@ -202,6 +210,16 @@ button{font-family:inherit;cursor:pointer}
 .d-tl-status.st-gold{color:#fafaE9;border-color:rgba(250,250,233,.5);background:rgba(250,250,233,.08)}
 .d-tl-status.st-cyan{color:#7ee0d2;border-color:rgba(126,224,210,.4);background:rgba(126,224,210,.08)}
 .d-tl-text{font-size:13.5px;color:#c8d0d8;line-height:2;max-width:38em;overflow-wrap:anywhere}
+/* 时间线条目：二级展开（默认 2 行截断，点击展开全文） */
+.d-tl{cursor:pointer;outline:none;border-radius:8px;padding-right:8px;transition:background .3s}
+.d-tl:hover{background:rgba(232,197,124,.045)}
+.d-tl::after{content:"⋯";position:absolute;right:2px;top:6px;color:var(--gold);opacity:0;font-size:14px;transition:opacity .25s}
+.d-tl:not(.open) .d-tl-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.d-tl:not(.open)::after{opacity:.55}
+.d-tl.open::after{content:"▴";opacity:.8}
+.d-tl.open .d-tl-text{-webkit-line-clamp:unset}
+.d-tl.open{background:rgba(232,197,124,.06)}
+@media (hover:none){.d-tl:not(.open) .d-tl-text{-webkit-line-clamp:unset}.d-tl::after{display:none}}
 /* 连接 */
 .d-links{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 @media (max-width:760px){.d-links{grid-template-columns:1fr}}
@@ -498,10 +516,23 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
   var DATA={
     chips:['漂泊者 · 独立开发者','共鸣 · AGENT / TOOLS','状态 · OPEN FOR WORK'],
     attrs:[
-      {n:'BUILD SPEED · 建造速度',v:88},{n:'DEBUG DEPTH · 调试深度',v:84},
-      {n:'UI TASTE · 界面审美',v:76},{n:'AUTOMATION · 自动化',v:90}
+      {n:'BUILD SPEED · 建造速度',v:88,x:'从想法到可运行原型，一天内交付是常态——脚手架与模板库齐全。'},
+      {n:'DEBUG DEPTH · 调试深度',v:84,x:'喜欢挖到根因：反代、DPAPI 凭据自愈这类硬骨头都能啃下来。'},
+      {n:'UI TASTE · 界面审美',v:76,x:'信奉克制的设计——留白与层级先于装饰，还在持续修炼。'},
+      {n:'AUTOMATION · 自动化',v:90,x:'凡是重复两次的动作，必然脚本化——签到、凹分数据、部署全自动。'}
     ],
-    modules:['Python','JavaScript','Node.js','PowerShell','YOLO / CV','LLM Agents','DSH 插件开发','Windows 自动化','Git / CI','OpenAI 兼容 API'],
+    modules:[
+      {n:'Python',x:'主力语言 · safeyolo 训练管线 / 工具链'},
+      {n:'JavaScript',x:'插件生态 · DSH 全家桶的日常载体'},
+      {n:'Node.js',x:'零依赖服务 · 反代与数据层的标准库流'},
+      {n:'PowerShell',x:'Windows 内科手术 · IDE 补丁与系统级脚本'},
+      {n:'YOLO / CV',x:'目标检测 · 安全帽/反光衣穿戴检测'},
+      {n:'LLM Agents',x:'模型编排 · 派活/记忆/用量监控'},
+      {n:'DSH 插件开发',x:'DeepSeek Harness 生态 · 5 插件维护者'},
+      {n:'Windows 自动化',x:'计划任务/签到/凭据热提取'},
+      {n:'Git / CI',x:'全绿强迫症 · 每个仓库都有流水线'},
+      {n:'OpenAI 兼容 API',x:'把一切模型封装成标准端点'}
+    ],
     projects:[
       {no:'OP-01',t:'safeyolo',lang:'PYTHON',st:'PUBLISHED',d:'基于 Ultralytics YOLO 的安全帽 / 反光衣穿戴检测训练工具：标注格式转换、数据集划分、训练与指标记录、评估与推理一体化 CLI，覆盖从原始标注到模型部署的完整流程。',tags:['Python','YOLO','CV'],meta:'★ 5 · MIT',u:'https://github.com/ponm3ay/safeyolo'},
       {no:'OP-02',t:'dsh-plugins',lang:'JAVASCRIPT',st:'ACTIVE',d:'DeepSeek Harness（DSH）插件集：按任务给不同模型派活的「辅助模型」槽位、跨会话长期记忆、子代理用量显示、界面背景与供应商染色。不改本体源码，每个插件可独立装卸。',tags:['JavaScript','DSH','Plugin'],meta:'5 PLUGINS IN ONE',u:'https://github.com/ponm3ay/dsh-plugins'},
@@ -524,10 +555,14 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
   if(ch)ch.innerHTML=DATA.chips.map(function(c){return '<span>'+esc(c)+'</span>'}).join('');
   var at=document.getElementById('dAttrs');
   if(at)at.innerHTML=DATA.attrs.map(function(a){
-    return '<div class="attr-row"><span class="attr-name">'+esc(a.n)+'</span><span class="attr-bar"><i data-w="'+a.v+'"></i></span><span class="attr-val">'+a.v+'</span></div>';
+    return '<div class="attr-blk" tabindex="0">'+
+      '<div class="attr-row"><span class="attr-name">'+esc(a.n)+'</span><span class="attr-bar"><i data-w="'+a.v+'"></i></span><span class="attr-val">'+a.v+'</span></div>'+
+      '<p class="attr-note">'+esc(a.x)+'</p></div>';
   }).join('');
   var mo=document.getElementById('dModules');
-  if(mo)mo.innerHTML=DATA.modules.map(function(m){return '<li>'+esc(m)+'</li>'}).join('');
+  if(mo)mo.innerHTML=DATA.modules.map(function(m){
+    return '<li tabindex="0"><b>'+esc(m.n)+'</b><span class="mod-x">'+esc(m.x)+'</span></li>';
+  }).join('');
   var pc=document.getElementById('dCards');
   if(pc)pc.innerHTML=DATA.projects.map(function(o,i){
     return '<article class="d-proj d-reveal" data-idx="'+i+'" tabindex="0" role="button" aria-label="展开 '+esc(o.t)+' 档案">'+
@@ -602,11 +637,27 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
     });
   }
   var tl=document.getElementById('dTimeline');
-  if(tl)tl.innerHTML+=DATA.log.map(function(l,i){
-    return '<div class="d-tl" style="--i:'+i+'"><p class="d-tl-date">'+esc(l.d)+'</p>'+
-      '<div class="d-tl-head"><h3 class="d-tl-title">'+esc(l.t)+'</h3><span class="d-tl-status">'+esc(l.s)+'</span></div>'+
-      '<p class="d-tl-text">'+esc(l.x)+'</p></div>';
-  }).join('');
+  if(tl){
+    tl.innerHTML+=DATA.log.map(function(l,i){
+      return '<div class="d-tl" style="--i:'+i+'" tabindex="0" role="button" aria-expanded="false" aria-label="展开 '+esc(l.t)+' 详情"><p class="d-tl-date">'+esc(l.d)+'</p>'+
+        '<div class="d-tl-head"><h3 class="d-tl-title">'+esc(l.t)+'</h3><span class="d-tl-status">'+esc(l.s)+'</span></div>'+
+        '<p class="d-tl-text">'+esc(l.x)+'</p></div>';
+    }).join('');
+    tl.addEventListener('click',function(e){
+      var it=e.target.closest('.d-tl');
+      if(!it)return;
+      var open=it.classList.toggle('open');
+      it.setAttribute('aria-expanded',open?'true':'false');
+    });
+    tl.addEventListener('keydown',function(e){
+      if(e.key!=='Enter'&&e.key!==' ')return;
+      var it=e.target.closest('.d-tl');
+      if(!it)return;
+      e.preventDefault();
+      var open=it.classList.toggle('open');
+      it.setAttribute('aria-expanded',open?'true':'false');
+    });
+  }
 })();
 
 /* 编排：reveal / grown / attr 填充 / 顶栏 */
@@ -615,7 +666,11 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
   var tl=document.getElementById('dTimeline');
   var topbar=document.getElementById('topBar');
   function onScroll(){
-    if(topbar){var gate=document.getElementById('profile')?document.getElementById('profile').offsetTop*0.7:400;topbar.classList.toggle('show',scrollY>gate)}
+    if(topbar){
+      topbar.classList.toggle('solid',scrollY>40);
+      var gate=document.getElementById('profile')?document.getElementById('profile').offsetTop*0.7:400;
+      topbar.classList.toggle('show',scrollY>gate);
+    }
   }
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('.d-reveal').forEach(function(e){e.classList.add('in')});
