@@ -125,8 +125,40 @@ html.js .slogan-row:not(:has(.g)) .s-ch{display:inline-block;opacity:0;transform
 .wave-sep svg{width:100%;height:70px;display:block}
 
 /* ===== 内容区（深蓝灰 · 鸣潮官网资讯语言） ===== */
-.deep{position:relative;z-index:10;background:linear-gradient(180deg,#1a2431 0%,#2c3e50 12%,#2c3e50 88%,#1a2431 100%)}
-.deep::before{content:"";position:absolute;left:0;right:0;top:0;height:110px;background:linear-gradient(180deg,rgba(11,13,18,.85),transparent);pointer-events:none}
+.deep{
+  position:relative;z-index:10;overflow:hidden;
+  background:
+    /* 点阵纹理 */
+    radial-gradient(rgba(250,250,233,.045) 1px,transparent 1.6px),
+    /* 斜向几何切面（左上亮楔形） */
+    linear-gradient(155deg,rgba(255,255,255,.045) 0%,transparent 34%),
+    /* 右下暗角 */
+    linear-gradient(335deg,rgba(0,0,0,.28) 0%,transparent 42%),
+    /* 斜向金线光带 */
+    linear-gradient(115deg,transparent 62%,rgba(232,197,124,.05) 66%,transparent 72%),
+    linear-gradient(295deg,transparent 55%,rgba(232,197,124,.04) 60%,transparent 68%),
+    /* 基底渐变 */
+    linear-gradient(180deg,#1a2431 0%,#2c3e50 14%,#293a4c 55%,#2c3e50 88%,#1a2431 100%);
+  background-size:26px 26px,auto,auto,auto,auto,auto;
+  background-attachment:local,local,local,local,local,scroll;
+}
+.deep::before{content:"";position:absolute;left:0;right:0;top:0;height:110px;background:linear-gradient(180deg,rgba(11,13,18,.85),transparent);pointer-events:none;z-index:1}
+/* M20: 大号描边水印字（右侧竖排装饰） */
+.deep .drift-wm{
+  position:absolute;right:-.06em;top:120px;writing-mode:vertical-rl;
+  font-family:var(--serif);font-weight:900;font-size:clamp(140px,16vw,260px);line-height:.92;
+  color:transparent;-webkit-text-stroke:1px rgba(250,250,233,.05);
+  letter-spacing:.12em;user-select:none;pointer-events:none;white-space:nowrap;
+}
+.deep .drift-wm b{color:transparent;-webkit-text-stroke:1px rgba(232,197,124,.09);font-weight:900}
+/* 区块斜切分隔条 */
+.d-sep{position:relative;height:74px;z-index:2;pointer-events:none}
+.d-sep i{position:absolute;left:-6%;right:-6%;height:120%;top:-10%;
+  background:linear-gradient(180deg,rgba(250,250,233,.028),rgba(250,250,233,.012));
+  border-block:1px solid rgba(232,197,124,.14);
+  transform:skewY(-2.2deg)}
+.d-sep i::after{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;
+  background:linear-gradient(90deg,transparent 4%,rgba(232,197,124,.5) 26%,rgba(232,197,124,.5) 74%,transparent 96%)}
 .d-wrap{width:min(1150px,100% - 48px);margin-inline:auto}
 .d-sec{padding:96px 0 40px}
 .d-head{text-align:center;margin-bottom:60px}
@@ -139,6 +171,16 @@ html.js .slogan-row:not(:has(.g)) .s-ch{display:inline-block;opacity:0;transform
 .d-card:hover{background-position:-70% 0}
 .d-card:hover{border-color:rgba(250,250,233,.4);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .d-tag{font-family:Consolas,monospace;font-size:10.5px;color:#fafaE9;opacity:.7;letter-spacing:.22em;margin-bottom:18px}
+/* M21: 档案卡引号水印 + 能力卡刻度背景 */
+.d-card::before{
+  content:"„";position:absolute;left:16px;top:2px;
+  font-family:var(--serif);font-weight:900;font-size:110px;line-height:1;
+  color:rgba(232,197,124,.07);pointer-events:none;user-select:none;
+}
+.d-card .attr-bar{
+  background-image:repeating-linear-gradient(90deg,transparent 0 9%,rgba(250,250,233,.22) 9% 10%);
+  background-color:rgba(255,255,255,.13);
+}
 .d-h{font-family:var(--serif);font-size:23px;font-weight:700;color:#fff;margin-bottom:14px}
 .d-h b{color:#fafaE9}
 .d-sub{font-size:12.5px;color:#b9b9b9;margin-left:12px;font-weight:400;font-family:var(--sans)}
@@ -171,9 +213,15 @@ html.js .slogan-row:not(:has(.g)) .s-ch{display:inline-block;opacity:0;transform
 .d-proj{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:26px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s}
 .d-proj:hover,.d-proj:focus-visible{transform:translateY(-5px);border-color:rgba(232,197,124,.5);box-shadow:0 20px 50px rgba(0,0,0,.4);background:rgba(255,255,255,.075)}
 .d-proj:hover .pj-wm{-webkit-text-stroke-color:rgba(232,197,124,.5);transform:translateX(-6px) scale(1.03)}
-.d-proj .pj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;z-index:1}
+.d-proj .pj-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin:-26px -26px 18px;padding:16px 26px;
+  background:linear-gradient(90deg,rgba(232,197,124,.09),rgba(232,197,124,.03) 60%,transparent);
+  border-bottom:1px solid rgba(232,197,124,.18);
+  position:relative;z-index:1;
+}
 .d-proj .pj-no{font-family:Consolas,monospace;font-size:11px;color:var(--gold);opacity:.85;letter-spacing:.2em}
-.d-proj .pj-lang{font-family:Consolas,monospace;font-size:9.5px;color:#fafaE9;opacity:.65;letter-spacing:.18em;border:1px solid rgba(250,250,233,.32);padding:3px 10px;border-radius:999px}
+.d-proj .pj-lang{font-family:Consolas,monospace;font-size:9.5px;color:#fafaE9;opacity:.85;letter-spacing:.18em;border:1px solid rgba(250,250,233,.32);padding:3px 10px;border-radius:999px;background:rgba(232,197,124,.1)}
 .d-proj h3{font-family:var(--serif);font-size:21px;font-weight:700;color:#fff;margin-bottom:10px;position:relative;z-index:1}
 .d-proj p{font-size:13px;color:#c8d0d8;line-height:1.9;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;position:relative;z-index:1;min-height:49px}
 .d-proj .pj-more{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:13px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em;position:relative;z-index:1}
@@ -407,6 +455,7 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
 
 <!-- 深蓝灰内容区 -->
 <div class="deep" id="profile">
+  <div class="drift-wm mono" aria-hidden="true">DRIFTER<b>·</b>ARCHIVE<b>·</b>SUPRA</div>
   <section class="d-sec" id="profile-head">
     <div class="d-wrap">
       <div class="d-head d-reveal">
@@ -444,6 +493,8 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
     </div>
   </section>
 
+  <div class="d-sep" aria-hidden="true"><i></i></div>
+
   <section class="d-sec" id="log">
     <div class="d-wrap">
       <div class="d-head d-reveal">
@@ -472,6 +523,8 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
       </div>
     </div>
   </section>
+
+  <div class="d-sep" aria-hidden="true"><i></i></div>
 </div>
 
 <div class="wave-bottom" aria-hidden="true">
