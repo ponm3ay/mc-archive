@@ -152,20 +152,41 @@ button{font-family:inherit;cursor:pointer}
 .d-mods-grid li::before{content:"◆";color:var(--gold);opacity:.55;font-size:8px}
 .d-mods-grid li:hover{border-color:rgba(232,197,124,.5);color:#fff;transform:translateY(-2px)}
 .d-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px}
-.d-proj{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s}
-.d-proj:hover{transform:translateY(-5px);border-color:rgba(250,250,233,.4);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.d-proj .pj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.d-proj .pj-no{font-family:Consolas,monospace;font-size:11px;color:#fafaE9;opacity:.75;letter-spacing:.2em}
+/* 项目卡：概要态（二级展开入口） */
+.d-proj{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:26px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s}
+.d-proj:hover,.d-proj:focus-visible{transform:translateY(-5px);border-color:rgba(232,197,124,.5);box-shadow:0 20px 50px rgba(0,0,0,.4);background:rgba(255,255,255,.075)}
+.d-proj .pj-wm{position:absolute;right:10px;top:-6px;font-family:var(--serif);font-weight:900;font-size:86px;line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(232,197,124,.16);user-select:none;pointer-events:none;transition:-webkit-text-stroke-color .35s,transform .5s var(--ease-out)}
+.d-proj:hover .pj-wm{-webkit-text-stroke-color:rgba(232,197,124,.5);transform:translateX(-6px) scale(1.03)}
+.d-proj .pj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;z-index:1}
+.d-proj .pj-no{font-family:Consolas,monospace;font-size:11px;color:var(--gold);opacity:.85;letter-spacing:.2em}
 .d-proj .pj-lang{font-family:Consolas,monospace;font-size:9.5px;color:#fafaE9;opacity:.65;letter-spacing:.18em;border:1px solid rgba(250,250,233,.32);padding:3px 10px;border-radius:999px}
-.d-proj h3{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
-.d-proj h3 a{transition:color .2s;padding:2px 0;display:inline-block}
-.d-proj h3 a:hover{color:#fafaE9}
-.d-proj p{font-size:13.5px;color:#c8d0d8;line-height:1.95;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.d-proj .pj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-.d-proj .pj-tags span{font-size:10px;color:#e1e1e1;border:1px solid rgba(255,255,255,.2);padding:3px 11px;border-radius:999px}
-.d-proj .pj-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:14px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em}
-.d-proj .pj-foot a{color:#dfe6ec;transition:color .2s;padding:12px 0 12px 8px}
-.d-proj .pj-foot a:hover{color:#fafaE9}
+.d-proj h3{font-family:var(--serif);font-size:21px;font-weight:700;color:#fff;margin-bottom:10px;position:relative;z-index:1}
+.d-proj p{font-size:13px;color:#c8d0d8;line-height:1.9;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;position:relative;z-index:1;min-height:49px}
+.d-proj .pj-more{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:13px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em;position:relative;z-index:1}
+.d-proj .pj-more .pm-hint{display:inline-flex;align-items:center;gap:7px;color:var(--gold);opacity:.75;transition:opacity .25s,gap .25s}
+.d-proj:hover .pj-more .pm-hint{opacity:1;gap:11px}
+/* Lightbox 档案（衬线黑金） */
+.mc-case{position:fixed;inset:0;z-index:160;display:flex;align-items:center;justify-content:center;padding:24px}
+.mc-case[hidden]{display:none}
+.mc-backdrop{position:absolute;inset:0;background:rgba(5,5,8,.84);backdrop-filter:blur(10px);animation:mcFade .3s}
+@keyframes mcFade{from{opacity:0}}
+.mc-box{position:relative;width:min(860px,100%);max-height:min(82vh,740px);overflow:auto;background:linear-gradient(165deg,#1a2431,#111722);border:1px solid rgba(232,197,124,.4);border-radius:14px;padding:36px 42px 32px;clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:mcReveal .55s var(--ease-out) .05s forwards;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+@keyframes mcReveal{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+.mc-wm{position:absolute;right:16px;top:2px;font-family:var(--serif);font-weight:900;font-size:150px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(232,197,124,.15);user-select:none;pointer-events:none}
+.mc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;position:relative;z-index:1}
+.mc-no{font-family:Consolas,monospace;font-size:12px;color:var(--gold);letter-spacing:.26em;font-weight:600}
+.mc-st{font-size:9.5px;letter-spacing:.18em;padding:4px 12px;border:1px solid rgba(232,197,124,.5);background:var(--gold-soft);color:var(--gold);border-radius:999px;align-self:flex-start}
+.mc-x{background:none;border:1px solid rgba(255,255,255,.25);color:#c8d0d8;width:32px;height:32px;font-size:13px;border-radius:999px;transition:.2s}
+.mc-x:hover{color:var(--gold);border-color:var(--gold)}
+.mc-title{font-family:var(--serif);font-size:clamp(26px,4vw,42px);font-weight:900;letter-spacing:.04em;margin-bottom:16px;color:#fff;position:relative;z-index:1;word-break:break-all}
+.mc-desc{font-size:15px;color:#c8d0d8;line-height:2.1;margin-bottom:22px;max-width:38em;position:relative;z-index:1}
+.mc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;position:relative;z-index:1}
+.mc-tags span{font-size:11px;color:#e1e1e1;border:1px solid rgba(255,255,255,.22);padding:4px 13px;border-radius:999px}
+.mc-foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-size:11px;color:#b9b9b9;letter-spacing:.14em;position:relative;z-index:1}
+.mc-nav{position:absolute;bottom:18px;right:42px;display:flex;gap:8px;z-index:2}
+.mc-nav button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);color:#c8d0d8;width:36px;height:36px;border-radius:999px;font-size:15px;transition:.2s;cursor:pointer}
+.mc-nav button:hover{color:var(--gold);border-color:var(--gold);background:rgba(232,197,124,.1)}
+.mc-cnt{font-family:Consolas,monospace;font-size:11px;color:#b9b9b9;letter-spacing:.2em;align-self:center}
 /* 轨迹 */
 .d-timeline{position:relative;padding-left:36px}
 .d-timeline::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,#fafaE9,rgba(250,250,233,.28) 90px,rgba(255,255,255,.15) 160px,rgba(255,255,255,.15))}
@@ -508,14 +529,78 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
   var mo=document.getElementById('dModules');
   if(mo)mo.innerHTML=DATA.modules.map(function(m){return '<li>'+esc(m)+'</li>'}).join('');
   var pc=document.getElementById('dCards');
-  if(pc)pc.innerHTML=DATA.projects.map(function(o){
-    return '<article class="d-proj d-reveal">'+
+  if(pc)pc.innerHTML=DATA.projects.map(function(o,i){
+    return '<article class="d-proj d-reveal" data-idx="'+i+'" tabindex="0" role="button" aria-label="展开 '+esc(o.t)+' 档案">'+
+      '<span class="pj-wm" aria-hidden="true">'+esc(o.no.replace(/^OP-/,''))+'</span>'+
       '<div class="pj-top"><span class="pj-no">'+esc(o.no)+'</span><span class="pj-lang">'+esc(o.lang)+'</span></div>'+
-      '<h3><a href="'+esc(o.u)+'" target="_blank" rel="noopener">'+esc(o.t)+'</a></h3>'+
+      '<h3>'+esc(o.t)+'</h3>'+
       '<p>'+esc(o.d)+'</p>'+
-      '<div class="pj-tags">'+o.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join('')+'</div>'+
-      '<div class="pj-foot"><span>'+esc(o.meta)+'</span><a href="'+esc(o.u)+'" target="_blank" rel="noopener">OPEN REPO ↗</a></div></article>';
+      '<div class="pj-more"><span>'+esc(o.meta)+'</span><span class="pm-hint">展开档案 <i>▸</i></span></div></article>';
   }).join('');
+  /* Lightbox：点击卡片展开衬线档案（←→ 导航 / Esc 关闭） */
+  var curIdx=0,lastFocus=null;
+  function stCls(st){return st==='gold'?'':st==='cyan'?'style="color:#7ee0d2;border-color:rgba(126,224,210,.4);background:rgba(126,224,210,.08)"':''}
+  function ensureCase(){
+    if(document.getElementById('mcCase'))return;
+    var d=document.createElement('div');
+    d.className='mc-case';d.id='mcCase';d.hidden=true;
+    d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');
+    d.innerHTML='<div class="mc-backdrop" data-close></div>'+
+      '<div class="mc-box"><span class="mc-wm" aria-hidden="true"></span>'+
+      '<div class="mc-head"><span class="mc-no"></span><span class="mc-st"></span>'+
+      '<button class="mc-x" aria-label="关闭">✕</button></div>'+
+      '<h3 class="mc-title"></h3><p class="mc-desc"></p><div class="mc-tags"></div>'+
+      '<div class="mc-foot"><span class="mc-meta"></span>'+
+      '<a class="caps solid mc-open" style="min-width:220px;padding:12px 30px;font-size:14px" target="_blank" rel="noopener">打开仓库</a></div>'+
+      '<div class="mc-nav"><span class="mc-cnt"></span><button data-dir="-1" aria-label="上一个">‹</button><button data-dir="1" aria-label="下一个">›</button></div></div>';
+    document.body.appendChild(d);
+    d.querySelector('[data-close]').addEventListener('click',closeCase);
+    d.querySelector('.mc-x').addEventListener('click',closeCase);
+    d.querySelectorAll('.mc-nav button').forEach(function(b){
+      b.addEventListener('click',function(){openCase(curIdx+ +b.getAttribute('data-dir'))});
+    });
+  }
+  function openCase(i){
+    ensureCase();
+    var list=DATA.projects;if(!list.length)return;
+    curIdx=(i+list.length)%list.length;
+    var o=list[curIdx],d=document.getElementById('mcCase');
+    lastFocus=document.activeElement;
+    d.querySelector('.mc-wm').textContent=String(o.no).replace(/^OP-/,'');
+    d.querySelector('.mc-no').textContent=o.no+' · '+o.lang;
+    var st=d.querySelector('.mc-st');st.textContent=o.status;st.setAttribute('style',stCls(o.st));
+    d.querySelector('.mc-title').textContent=o.t;
+    d.querySelector('.mc-desc').textContent=o.d;
+    d.querySelector('.mc-tags').innerHTML=o.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join('');
+    d.querySelector('.mc-meta').textContent=o.meta;
+    d.querySelector('.mc-open').href=o.u;
+    d.querySelector('.mc-cnt').textContent=(curIdx+1)+' / '+list.length;
+    d.hidden=false;document.body.style.overflow='hidden';
+    d.querySelector('.mc-x').focus();
+  }
+  function closeCase(){
+    var d=document.getElementById('mcCase');
+    if(!d||d.hidden)return;
+    d.hidden=true;document.body.style.overflow='';
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  if(pc){
+    pc.addEventListener('click',function(e){
+      var card=e.target.closest('.d-proj');
+      if(card)openCase(+card.getAttribute('data-idx'));
+    });
+    pc.addEventListener('keydown',function(e){
+      var card=e.target.closest('.d-proj');
+      if(card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openCase(+card.getAttribute('data-idx'))}
+    });
+    document.addEventListener('keydown',function(e){
+      var d=document.getElementById('mcCase');
+      if(!d||d.hidden)return;
+      if(e.key==='Escape')closeCase();
+      if(e.key==='ArrowLeft')openCase(curIdx-1);
+      if(e.key==='ArrowRight')openCase(curIdx+1);
+    });
+  }
   var tl=document.getElementById('dTimeline');
   if(tl)tl.innerHTML+=DATA.log.map(function(l,i){
     return '<div class="d-tl" style="--i:'+i+'"><p class="d-tl-date">'+esc(l.d)+'</p>'+
