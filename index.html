@@ -31,6 +31,7 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .mono{font-family:var(--mono)}
+.nw{white-space:nowrap}
 
 /* ===== 场景底（全屏固定 · 随场景换色） ===== */
 @property --t1{syntax:'<color>';inherits:true;initial-value:rgba(232,197,124,.16)}
@@ -86,6 +87,7 @@ body[data-scene="connect"]{--t1:rgba(126,224,210,.13);--t2:rgba(64,128,136,.11);
 main{position:relative;z-index:10}
 .view{position:relative;padding:104px 24px 170px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
 .view .v-inner{width:min(1180px,100%);margin-inline:auto;flex:1;display:flex;flex-direction:column;justify-content:center}
+.v-body{flex:1;display:flex;flex-direction:column;justify-content:center}
 @media (min-width:900px){
   body{overflow:hidden}
   html:not(.js) body{overflow:visible}
@@ -167,6 +169,7 @@ html.reveal-done .slogan .g{opacity:1 !important;filter:blur(0) drop-shadow(0 3p
 html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:none !important;animation:none !important}
 
 /* ===== 场景通用面板 ===== */
+.p-grid .panel{display:flex;flex-direction:column}
 .panel{position:relative;background:rgba(13,15,20,.62);border:1px solid rgba(232,197,124,.16);border-radius:14px;padding:24px 26px;backdrop-filter:blur(10px);overflow:hidden}
 .panel::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(232,197,124,.06) 50%,transparent 58%);background-size:230% 100%;background-position:135% 0;background-repeat:no-repeat;transition:background-position .95s var(--ease-out);pointer-events:none}
 .panel:hover::after{background-position:-70% 0}
@@ -210,7 +213,8 @@ html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:
 .strip-zone{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
 .strip{display:flex;gap:20px;overflow-x:auto;overflow-y:hidden;padding:10px 6px 22px;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 72px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 72px),transparent)}
 .strip.scrolled{-webkit-mask-image:linear-gradient(90deg,transparent,#000 72px,#000 calc(100% - 72px),transparent);mask-image:linear-gradient(90deg,transparent,#000 72px,#000 calc(100% - 72px),transparent)}
-.strip::after{content:"";flex:0 0 40px}
+.strip::before{content:"";flex:0 0 var(--tail,40px)}
+.strip::after{content:"";flex:0 0 var(--tail,40px)}
 .strip::-webkit-scrollbar{display:none}
 .strip .d-proj{flex:0 0 clamp(300px,27vw,392px);scroll-snap-align:center}
 .d-proj{background:rgba(13,15,20,.62);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s;backdrop-filter:blur(10px)}
@@ -450,7 +454,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
         <span class="slogan-row"><span class="g">码织千务</span><span class="seal">漂</span></span>
         <span class="slogan-row">潮涌万象</span>
       </h1>
-      <p class="tagline">AUTOMATION · <em>SCRIPTS</em> · 漂泊者的工具潮</p>
+      <p class="tagline">AUTOMATION · <em>SCRIPTS</em> · <span class="nw">漂泊者的工具潮</span></p>
       <p class="date-tag"><b>2026</b> · DEEP SLEEP 之外，另有岸边</p>
       <div class="cta-row v-el" style="--i:1">
         <a class="caps solid" href="https://github.com/ponm3ay?tab=repositories" target="_blank" rel="noopener">GITHUB · 仓库总览</a>
@@ -467,6 +471,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
         <h2 class="v-title">总结与能力评估</h2>
         <span class="v-line"></span>
       </header>
+      <div class="v-body">
       <div class="p-grid">
         <article class="panel v-el" style="--i:1">
           <p class="ptag">// RESONANCE · 情报总结</p>
@@ -482,6 +487,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
       <div class="d-mods v-el" style="--i:3">
         <p class="ptag">// MODULES · 共鸣链</p>
         <ul class="mods-grid" id="dModules"></ul>
+      </div>
       </div>
     </div>
   </section>
@@ -514,7 +520,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
         <h2 class="v-title">行动记录</h2>
         <span class="v-line"></span>
       </header>
-      <div class="log-wrap">
+      <div class="log-wrap v-body">
         <div class="d-timeline" id="dTimeline"></div>
       </div>
     </div>
@@ -528,6 +534,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
         <h2 class="v-title">建立连接</h2>
         <span class="v-line"></span>
       </header>
+      <div class="v-body">
       <div class="d-links">
         <a class="d-link v-el" style="--i:1" href="mailto:sevenmaples@163.com">
           <b>MAIL</b><span>sevenmaples@163.com</span><i>→</i>
@@ -543,6 +550,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
         </a>
       </div>
       <p class="connect-foot v-el" style="--i:5">© 2026 PONM3AY · DRIFTER ARCHIVE<span class="sep">◆</span>KURO-STYLE SCENE SITE · POWERED BY GITHUB PAGES</p>
+      </div>
     </div>
   </section>
 </main>
@@ -564,13 +572,13 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
   <span class="sh-word">SCROLL</span>
   <i class="sh-arrow"></i>
 </div>
-<div class="pager" role="tablist" aria-label="场景页码">
+<nav class="pager" aria-label="场景页码">
   <button class="pg on" data-go="home" aria-label="首页"><i></i><b>首页</b></button>
   <button class="pg" data-go="profile" aria-label="档案"><i></i><b>档案</b></button>
   <button class="pg" data-go="works" aria-label="作品"><i></i><b>作品</b></button>
   <button class="pg" data-go="log" aria-label="轨迹"><i></i><b>轨迹</b></button>
   <button class="pg" data-go="connect" aria-label="连接"><i></i><b>连接</b></button>
-</div>
+</nav>
 
 <!-- 移动端菜单 -->
 <div class="m-menu" id="mMenu" hidden>
@@ -664,11 +672,24 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
   function step(){var c=strip&&strip.querySelector('.d-proj');return c?c.getBoundingClientRect().width+20:400}
   function updateCount(){
     if(!strip)return;
-    var i=Math.round(strip.scrollLeft/step());
-    i=Math.max(0,Math.min(DATA.projects.length-1,i));
+    var cards=strip.querySelectorAll('.d-proj');
+    if(!cards.length)return;
+    var mid=strip.getBoundingClientRect().left+strip.clientWidth/2,best=0,bd=1e9;
+    cards.forEach(function(c,i){
+      var r=c.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mid);
+      if(d<bd){bd=d;best=i}
+    });
     var el=document.getElementById('stCount');
-    if(el)el.textContent=('0'+(i+1)).slice(-2)+' / '+('0'+DATA.projects.length).slice(-2);
+    if(el)el.textContent=('0'+(best+1)).slice(-2)+' / '+('0'+cards.length).slice(-2);
   }
+  function padTail(){
+    if(!strip)return;
+    var c=strip.querySelector('.d-proj');if(!c)return;
+    var w=c.getBoundingClientRect().width;
+    strip.style.setProperty('--tail',Math.max(0,(strip.clientWidth-w)/2-6)+'px');
+  }
+  addEventListener('resize',padTail);
+  setTimeout(padTail,60);
   if(strip){
     strip.addEventListener('scroll',function(){
       updateCount();
@@ -706,8 +727,8 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     });
   }
   var pv=document.getElementById('stPrev'),nx=document.getElementById('stNext');
-  if(pv)pv.addEventListener('click',function(){strip&&strip.scrollBy({left:-step()*2,behavior:'smooth'})});
-  if(nx)nx.addEventListener('click',function(){strip&&strip.scrollBy({left:step()*2,behavior:'smooth'})});
+  if(pv)pv.addEventListener('click',function(){strip&&strip.scrollBy({left:-step(),behavior:'smooth'})});
+  if(nx)nx.addEventListener('click',function(){strip&&strip.scrollBy({left:step(),behavior:'smooth'})});
 
   /* ===== Lightbox ===== */
   function stCls(st){
@@ -902,7 +923,10 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     if(!g)return;
     var name=g.getAttribute('data-go');
     if(desktopMq.matches){e.preventDefault();go(name)}
-    else if(g.tagName==='A'){closeMMenu()} /* 移动端交给原生锚点 */
+    else if(g.tagName==='A'){
+      document.querySelectorAll('.m-menu nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-go')===name)});
+      closeMMenu();
+    } /* 移动端交给原生锚点 */
   });
   /* 键盘切景（Lightbox 开启时让位） */
   document.addEventListener('keydown',function(e){
@@ -925,9 +949,13 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     var strip=e.target.closest&&e.target.closest('.strip');
     if(strip){
       var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
-      var can=(d>0&&strip.scrollLeft<strip.scrollWidth-strip.clientWidth-1)||(d<0&&strip.scrollLeft>1);
-      if(can){strip.scrollLeft+=d;e.preventDefault()}
-      return; /* 到边：落入场景切换 */
+      /* scroll-snap 会在端点回吸，须留容差，否则右缘成死区 */
+      var maxL=strip.scrollWidth-strip.clientWidth;
+      var can=(d>0&&strip.scrollLeft<maxL-24)||(d<0&&strip.scrollLeft>24);
+      if(can){strip.scrollLeft+=d;e.preventDefault();return}
+      e.preventDefault();
+      if(Math.abs(d)>=10)goStep(d>0?1:-1);
+      return;
     }
     var v=document.querySelector('.view.active');
     if(v&&v.scrollHeight>v.clientHeight+2){
