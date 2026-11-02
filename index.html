@@ -36,10 +36,10 @@ button{font-family:inherit;cursor:pointer}
 .scene{position:fixed;inset:0;z-index:0;pointer-events:none}
 .vortex{position:absolute;left:50%;top:40%;width:150vmax;height:95vmax;transform:translate(-50%,-50%);
   background:
-    radial-gradient(ellipse 30% 24% at 50% 48%,rgba(232,197,124,.22),transparent 68%),
-    radial-gradient(ellipse 52% 38% at 48% 54%,rgba(150,95,45,.14),transparent 72%),
-    radial-gradient(ellipse 85% 62% at 50% 58%,rgba(60,38,20,.22),transparent 76%);
-  filter:blur(8px);animation:vortexDrift 30s ease-in-out infinite alternate}
+    radial-gradient(ellipse 22% 18% at 50% 48%,rgba(232,197,124,.20),transparent 64%),
+    radial-gradient(ellipse 42% 30% at 48% 54%,rgba(170,110,50,.10),transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 58%,rgba(50,32,18,.16),transparent 74%);
+  filter:blur(10px);animation:vortexDrift 30s ease-in-out infinite alternate}
 @keyframes vortexDrift{0%{transform:translate(-50%,-50%) scale(1) rotate(0)}100%{transform:translate(-47%,-53%) scale(1.15) rotate(2.5deg)}}
 .beams{position:absolute;inset:-22%;
   background:conic-gradient(from 205deg at 60% 36%,transparent 0deg,rgba(232,197,124,.06) 16deg,transparent 34deg),
@@ -165,6 +165,8 @@ html.js .slogan-row:not(:has(.g)) .s-ch{display:inline-block;opacity:0;transform
 .d-mods-grid li:hover,.d-mods-grid li:focus-visible{border-color:rgba(232,197,124,.5);color:#fff;transform:translateY(-2px)}
 .d-mods-grid li:hover .mod-x,.d-mods-grid li:focus-visible .mod-x{max-height:48px;opacity:.85;margin-top:6px}
 .d-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px}
+/* 8 卡 3 列布局的末行空位：末卡跨列补齐（3n+2 布局时） */
+.d-proj:last-child:nth-child(3n+2){grid-column:span 2}
 /* 项目卡：概要态（二级展开入口） */
 .d-proj{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:26px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s}
 .d-proj:hover,.d-proj:focus-visible{transform:translateY(-5px);border-color:rgba(232,197,124,.5);box-shadow:0 20px 50px rgba(0,0,0,.4);background:rgba(255,255,255,.075)}
