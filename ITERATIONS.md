@@ -1,5 +1,22 @@
 # 迭代记录 — DRIFTER ARCHIVE（鸣潮黑金版）
 
+## Round V1（v3 场景化重写：对齐 mc.kurogames.com/main 真身）
+**用户裁定**: 「参考不出是因为只看了官网第一页——https://mc.kurogames.com/main 从这开始看」。全页渲染实拍 7 张后确认：官网主站是**全屏场景切换架构**（每屏一整幅场景 artwork + 固定极简 chrome：顶部导航+当前项六角徽章框 / 底部下载矩阵 / 左下社交 / 右下 SCROLL / 竖排书法 LOGO），零长页滚动。
+**重写**: index.html v2（长滚动深蓝灰内容区）→ v3 场景架构：
+- **5 个全屏 `<section class="view">`**（首页 KV / 档案 / 作品 / 轨迹 / 连接），桌面端 fixed 层叠 + opacity/visibility 过渡 + 逐元素 stagger（.v-el + --i 延迟）；移动端 <900px 自动降级为静态纵向流（同一 DOM，media query 切换），no-js 同样流式直显。
+- **固定 chrome**: 顶部导航（当前项金色六角徽章框 = mask-composite 描边 + clip-path 六边形）、右上 GITHUB 胶囊、底部中央入口矩阵（作品档案/GITHUB/ARK SITE 三卡，对应官方下载矩阵）、左下社交圆钮、右下 `01/05 + SCROLL` 落点动画竖线、右侧菱形页码点（悬停出汉字标签）。
+- **场景换色底**: @property 注册 --t1/--t2/--t3 色变量，body[data-scene] 切换渐变色相（首页金/档案青/作品琥珀/轨迹红/连接青蓝），vortex/beams 平滑变色——低成本模拟官方「每景不同 artwork」。
+- **侧边大字水印**: 竖排描边书法（漂泊者档案/作品档案/行动记录/建立连接）随景切换。
+- **作品卷轴**: 8 卡横向 snap 卷轴，中心舞台模式（首尾等宽垫距使任意卡可居中）、双缘软渐隐（.scrolled 才启用左缘）、拖拽/箭头/滚轮横滑、计数=最近居中卡几何；点击开 Lightbox（衬线黑金档案 + 焦点圈闭）。
+- **路由**: hash（#works 直达/刷新保持）+ 滚轮（场景内可滚先滚、卷轴横向消费、到边 24px 容差后切景——scroll-snap 会把端点回吸出 20px 死区，纯 scrollWidth 判边必踩坑）+ 方向键/PgUp/PgDn/数字键 1-5 + 导航/页码点点击；切景 lock 1s 防触控板惯性连跳；淡出旧景 pointer-events:none 防误点。
+**QA 适配**: shot/interact/audit 三脚本全部场景化（audit 逐景审计+移动整页；shot 每景实拍）。回归：交互 13/13、盲审 0/0/0、8 档宽度全过、JSERR clean。
+**零上下文评审 ×3 轮（均 PASS，逐轮收敛）**:
+- M28 轮（A8/B7/C7/D8/E8/F7）→ 修复：**mod-x 行内盒 bug**（span 上 max-height/overflow 无效→卡片被隐形文字撑空 45px 且展开失效，display:block 一行修复）、卷轴右缘硬切→72px 渐隐、二级内容 ▸ 角标、术语统一「作品档案」、Lightbox 焦点圈闭。
+- M29 轮（A8/B9/C8/D8/E9/F8）→ 修复：卷轴左缘滚动后渐隐、档案右卡 space-evenly、淡出旧景可点击、title 完整副题、滚轮 lock 1s、状态徽章映射对齐轨迹场景（★→青/ARCHIVED→暗）、触屏提示文案按 hover:none 换真话、▸ 进场 nudge 引导动画。
+- M30 轮（A9/B9/C7/D8/E9/F7）→ 实跑探针抓出三个真交互 bug：**卷轴端点 snap 死区**（滚轮永远切不出作品景）、**计数器几何错位**（末端永远 06/08）、**右卡空腔修复未生效**（.panel 是 block，flex 属性全死代码）——分别以 24px 容差 / 最近居中卡遍历 / .p-grid .panel flex 化修复；另：场景头锚点统一（v-body 吸收 slack，五景 kicker 同高）、移动菜单当前项联动、pager ARIA 修正、tagline nowrap。
+**教训追加**: ⑨ 行内元素上 max-height/overflow 静默无效（span 必须 display:block 才能 max-height 收展）；⑩ scroll-snap mandatory 会让端点 scrollLeft 回吸到 snap 点，scrollWidth-clientWidth 判「到底」必留 >snap 距离的容差；⑪ flex:1 子项只有父容器是 flex 才生效（.panel 默认 block 让整个对齐策略静默失效）；⑫ 全屏场景站的「内容被固定 dock 遮挡」要用「视口高-上padding-下padding」预算校验每景，900px 基准高度逐景实测。
+**部署**: commit 4404728 → https://ponm3ay.github.io/mc-archive/
+
 ## Round M1-M2（第六期：鸣潮黑金版全新主站）
 **需求**: 按 mc.kurogames.com 风格出新版主站；新网址；不覆盖旧成品（ponm3ay.github.io 保持不变）。
 **研究**: mc 官网 SPA 壳 + CSS 令牌（#181818/#222 深黑底、Inter 系、自定 jit/advent 字体）→ 本站令牌：底 #121212-#1d1d20 / 字 #f5f2ea / 金 #e8c57c→#c9a063 / 青 #7ee0d2。
