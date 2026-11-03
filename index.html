@@ -34,6 +34,21 @@ button{font-family:inherit;cursor:pointer}
 .st-count,.sh-count,.mc-cnt,.attr-val,.d-tl-date,.pj-no{font-variant-numeric:tabular-nums}
 .nw{white-space:nowrap}
 
+/* ===== boot 揭幕 ===== */
+.boot{position:fixed;inset:0;z-index:300;background:#0a0b0e;display:grid;place-items:center}
+.boot-in{display:flex;flex-direction:column;align-items:center;gap:18px;transition:opacity .5s ease,transform .5s ease}
+html.booted .boot{opacity:0;visibility:hidden;transition:opacity .6s ease .12s,visibility 0s .75s}
+html.booted .boot-in{opacity:0;transform:translateY(-14px)}
+.boot-seal{font-family:var(--serif);font-weight:900;font-size:60px;color:#fff;background:var(--seal);width:1.4em;height:1.4em;display:grid;place-items:center;border-radius:8px;transform:rotate(6deg);box-shadow:0 6px 30px rgba(0,0,0,.55);animation:bootStamp .55s cubic-bezier(.34,1.56,.64,1) .25s both}
+@keyframes bootStamp{0%{opacity:0;transform:rotate(16deg) scale(2.3)}60%{opacity:1;transform:rotate(6deg) scale(.94)}100%{opacity:1;transform:rotate(6deg) scale(1)}}
+.boot-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:bootLine .8s var(--ease-out) .72s forwards}
+@keyframes bootLine{to{width:190px}}
+.boot-word{font-family:var(--mono);font-size:10px;letter-spacing:.52em;text-indent:.52em;color:rgba(250,250,233,.6);opacity:0;animation:bootWord .6s ease 1.05s forwards}
+@keyframes bootWord{to{opacity:1}}
+html.js:not(.booted) .eyebrow,html.js:not(.booted) .slogan .g,html.js:not(.booted) .slogan-row:not(:has(.g)) .s-ch,html.js:not(.booted) .seal,html.js:not(.booted) .tagline,html.js:not(.booted) .date-tag,html.js:not(.booted) .dock-card{animation-play-state:paused !important}
+html:not(.js) .boot{display:none}
+@media (prefers-reduced-motion:reduce){.boot{display:none}}
+
 /* ===== 场景底（全屏固定 · 随场景换色） ===== */
 @property --t1{syntax:'<color>';inherits:true;initial-value:rgba(232,197,124,.16)}
 @property --t2{syntax:'<color>';inherits:true;initial-value:rgba(170,110,50,.09)}
@@ -139,6 +154,12 @@ html.reveal-done .view .v-line{transform:scaleX(1)}
 .slogan{font-family:var(--serif);font-weight:900;font-size:clamp(46px,9.4vw,124px);line-height:1.28;letter-spacing:.1em;color:var(--paper);
   text-shadow:0 6px 50px rgba(0,0,0,.85),0 0 90px rgba(232,197,124,.12)}
 .slogan .g{background:linear-gradient(160deg,#f8e6b8 8%,#e8c57c 48%,#c9a063 92%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 18px rgba(232,197,124,.22))}
+.slogan .seal{cursor:pointer}
+.slogan .seal.pop{animation:sealPop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes sealPop{0%{transform:rotate(6deg) scale(1)}35%{transform:rotate(3deg) scale(1.22)}100%{transform:rotate(6deg) scale(1)}}
+.slogan .g.replay{animation:gIn 1.1s var(--ease-out) both !important}
+.seal-ripple{position:fixed;z-index:5;width:12px;height:12px;margin:-6px 0 0 -6px;border:1.5px solid rgba(232,197,124,.55);border-radius:50%;pointer-events:none;animation:rippleOut .9s var(--ease-out) forwards}
+@keyframes rippleOut{to{width:130vmax;height:130vmax;margin:-65vmax 0 0 -65vmax;opacity:0}}
 .slogan-row{display:block}
 html.js .slogan .g{opacity:0;filter:blur(14px) drop-shadow(0 3px 18px rgba(232,197,124,.22));animation:gIn 1.1s var(--ease-out) .55s forwards}
 @keyframes gIn{to{opacity:1;filter:blur(0) drop-shadow(0 3px 18px rgba(232,197,124,.22))}}
@@ -153,7 +174,7 @@ html.js .slogan-row:not(:has(.g)) .s-ch{display:inline-block;opacity:0;transform
   font-family:var(--serif);font-weight:900;
   opacity:0;animation:sealStamp .5s cubic-bezier(.34,1.56,.64,1) 1.5s forwards}
 @keyframes sealStamp{0%{opacity:0;transform:rotate(14deg) scale(2.2)}100%{opacity:1;transform:rotate(6deg) scale(1)}}
-html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale(1) !important;animation:none !important}
+html.reveal-done .slogan .seal:not(.pop){opacity:1 !important;transform:rotate(6deg) scale(1) !important;animation:none !important}
 .tagline{margin-top:3.4vh;font-family:var(--serif);font-size:clamp(15px,2vw,21px);letter-spacing:.34em;text-indent:.34em;color:var(--paper);opacity:0;animation:fadeUp 1s var(--ease-out) 1.2s forwards}
 .tagline em{font-style:normal;color:var(--gold)}
 .date-tag{margin-top:1.4vh;font-family:var(--mono);font-size:clamp(11px,1.3vw,14px);color:var(--mist);letter-spacing:.34em;opacity:0;animation:fadeUp 1s var(--ease-out) 1.5s forwards}
@@ -177,7 +198,7 @@ html.reveal-done .slogan .seal{opacity:1 !important;transform:rotate(6deg) scale
 /* RM / 兜底：KV 全员终态 */
 @media (prefers-reduced-motion:reduce){.eyebrow,.tagline,.date-tag{opacity:1;animation:none}.slogan .g,.slogan-row:not(:has(.g)) .s-ch,.seal{opacity:1;animation:none;transform:rotate(6deg)}}
 html.reveal-done .eyebrow,html.reveal-done .tagline,html.reveal-done .date-tag,html.reveal-done .cta-row{opacity:1 !important;transform:none !important;animation:none !important}
-html.reveal-done .slogan .g{opacity:1 !important;filter:blur(0) drop-shadow(0 3px 18px rgba(232,197,124,.22)) !important;animation:none !important}
+html.reveal-done .slogan .g:not(.replay){opacity:1 !important;filter:blur(0) drop-shadow(0 3px 18px rgba(232,197,124,.22)) !important;animation:none !important}
 html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:none !important;animation:none !important}
 
 /* ===== 场景通用面板 ===== */
@@ -445,6 +466,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
 </style>
 </head>
 <body data-scene="home">
+<div class="boot" id="boot" aria-hidden="true"><div class="boot-in"><span class="boot-seal">漂</span><i class="boot-line"></i><span class="boot-word">DRIFTER ARCHIVE</span></div></div>
 <div class="scene" aria-hidden="true">
   <div class="vortex"></div>
   <div class="beams"></div>
@@ -488,7 +510,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     <div class="v-inner home-inner">
       <p class="eyebrow"><b>EST.2022</b> · GITHUB PAGES · OPEN FOR WORK</p>
       <h1 class="slogan">
-        <span class="slogan-row"><span class="g">码织千务</span><span class="seal">漂</span></span>
+        <span class="slogan-row"><span class="g">码织千务</span><span class="seal" role="button" tabindex="0" aria-label="印章彩蛋：盖章" title="盖 章">漂</span></span>
         <span class="slogan-row">潮涌万象</span>
       </h1>
       <p class="tagline">AUTOMATION · <em>SCRIPTS</em> · <span class="nw">漂泊者的工具潮</span></p>
@@ -1089,6 +1111,40 @@ window.closeMMenu=closeMMenu;
       if(e.key==='Escape')closeMMenu();
     });
   }
+})();
+
+/* ===== boot 揭幕时序 ===== */
+(function(){
+  var boot=document.getElementById('boot');
+  function done(){
+    document.documentElement.classList.add('booted');
+    if(boot){boot.classList.add('out');setTimeout(function(){boot.remove()},800)}
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){if(boot)boot.remove();document.documentElement.classList.add('booted');return}
+  /* 每会话只播一次：刷新/视口切换重载不再重播开场 */
+  if(sessionStorage.getItem('mc_boot')){if(boot)boot.remove();document.documentElement.classList.add('booted');return}
+  sessionStorage.setItem('mc_boot','1');
+  setTimeout(done,1600);
+})();
+
+/* ===== 印章彩蛋：盖章→金色涟漪→标语重现墨晕 ===== */
+(function(){
+  var seal=document.querySelector('.slogan .seal');
+  if(!seal)return;
+  function pop(){
+    seal.classList.remove('pop');void seal.offsetWidth;seal.classList.add('pop');
+    var r=seal.getBoundingClientRect();
+    var rip=document.createElement('i');
+    rip.className='seal-ripple';
+    rip.style.left=(r.left+r.width/2)+'px';
+    rip.style.top=(r.top+r.height/2)+'px';
+    document.body.appendChild(rip);
+    setTimeout(function(){rip.remove()},950);
+    var g=document.querySelector('.slogan .g');
+    if(g){g.classList.remove('replay');void g.offsetWidth;g.classList.add('replay');setTimeout(function(){g.classList.remove('replay')},1300)}
+  }
+  seal.addEventListener('click',pop);
+  seal.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pop()}});
 })();
 
 /* ===== 进场兜底：2.8s 后强制终态 ===== */
