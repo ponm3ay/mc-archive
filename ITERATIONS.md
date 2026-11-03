@@ -1,5 +1,20 @@
 # 迭代记录 — DRIFTER ARCHIVE（鸣潮黑金版）
 
+## Round V2（十轮迭代冲刺：R1-R10）
+**背景**: v3 场景化架构上线后，用户令「继续迭代至少10轮」，并于中途追加「迭代完成后记得自动执行关机」。
+**逐轮**:
+- **R1**（第4轮评审修复）: 作品卷轴大卡化（92% 中心舞台卡，静置邻卡只露边缘软垫区——根治正文进渐隐带被切字 + 静置左空腔）；轨迹展开提示贴行（展开▾/收起▴，与作品「展开档案▸」同语言）；档案 H2 对齐场景命名；页脚去「仿官网」自述；移动页脚可读性；1-5 DIRECT 直达提示（SCROLL 行 + 页码点 title）。
+- **R2 动效运镜**: 场景切换由纯 crossfade 升级为运镜（旧景 scale .986 回撤 + 新景推近落定）；v-title 金带扫光（background-clip:text + background-position 动画）；v-line 金线生长；卷轴卡随景错峰滑入（--i×55ms）；dock 三卡载入错峰。
+- **R3 视觉氛围**: 每景专属装饰层——档案雷达环（70s 缓旋 SVG）/ 作品角框矩阵（data-uri 角标纹理）/ 轨迹路径虚线+菱形节点 / 连接六边网格；场景 overflow-x:hidden 封死装饰越界；**回归教训：装饰层 right:-190px 在移动端静态流撑出 289px 溢出 + 拦截 burger 点击——装饰层移动端整体 display:none**。
+- **R4 中检**（零上下文，PASS A9）: connect 顶线白条金化全宽；▸ 暗示增强（10px/.6）；works 徽章实底防水印穿字；轨迹条目间距压缩；connect 页脚沉底贴 dock。
+- **R5 排印**: 数字等宽 tabular-nums（计数/评分/日期/编号）；中文正文两端对齐（justify）。
+- **R6 作品景深挖**: 水印悬停视差（--px/--py 随指针 ±12/±8px）；卷轴进度线（spFill）；水印 110px 强化；Lightbox 进出场（微缩落定 + 240ms 收场 + closing 防抖）。
+- **R7 评审（FAIL→修，关键轮）**: **P0 真实鼠标点击卡片开不了 Lightbox——pointerdown 上的 setPointerCapture 把 click 重定向到 strip**；历轮 QA 用合成 .click() 绕过指针管线所以从未暴露。修复：捕获延迟到 pointermove 拖拽阈值（>8px）触发。**回归加固：interact.js 新增真实鼠标全路径步骤（move→down→up），共 14 步**。另修：触屏展开标签选择器错挂（.d-tl::after→.d-tl-head::after）、移动菜单滚动穿透（开菜单锁 body overflow）+ Escape 关闭 + 焦点管理、卷轴端点容差 24→44px（snap 回吸余量 2.2x）、翻页箭头端点禁用态 + resize 刷计数。
+- **R8 性能**: 金尘 rAF 页面隐藏暂停（visibilitychange）；perf.js 探针（headless 软渲染基线 46fps，属环境上限）；RM 完备性探针全过（reduce 下动画全关、内容直显）。
+- **R9 创意亮点**: **boot 揭幕序列**（黑幕→红印「漂」盖章→金线展开→DRIFTER ARCHIVE 铭牌→揭幕；RM 直通；**每会话一次**）；**印章彩蛋**（点击印章→弹跳+金色涟漪全屏扩散+标语重现墨晕，Enter/Space 可及，reveal-done 兜底 :not(.pop)/:not(.replay) 放行彩蛋动画）。**QA 揪坑：puppeteer 切 isMobile 会强制页面重载→揭幕层复活拦截 burger 点击→会话跳过机制同时修真实用户刷新重播问题**。
+- **R10 终审**: 全维度零上下文评审 **PASS（A9/B9/C9/D7/E8/F8）**，boot 揭幕判定「气质一致、不喧宾夺主」。修复三项：**P1 印章彩蛋自毁**（.seal 基础态 opacity:0，.pop 未含 opacity → 点击后印章跌回隐形且无法再点——`.seal.pop{opacity:1 !important}` 一行修复）；移动端顶栏加向下渐隐 scrim（滚动内容不再撞品牌字）；作品景方向键全局代理（免聚焦即左右翻卡，strip 聚焦时让位防双步进）。
+**机制沉淀**: 评审轮与专项轮交替；每轮必过全量 QA 电池（interact 14 步 / audit 逐景 / widths 8 档 / shot 全景）才提交；提交即推送即线上验证。
+
 ## Round V1（v3 场景化重写：对齐 mc.kurogames.com/main 真身）
 **用户裁定**: 「参考不出是因为只看了官网第一页——https://mc.kurogames.com/main 从这开始看」。全页渲染实拍 7 张后确认：官网主站是**全屏场景切换架构**（每屏一整幅场景 artwork + 固定极简 chrome：顶部导航+当前项六角徽章框 / 底部下载矩阵 / 左下社交 / 右下 SCROLL / 竖排书法 LOGO），零长页滚动。
 **重写**: index.html v2（长滚动深蓝灰内容区）→ v3 场景架构：
