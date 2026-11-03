@@ -216,7 +216,7 @@ html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:
 .strip::before{content:"";flex:0 0 var(--tail,40px)}
 .strip::after{content:"";flex:0 0 var(--tail,40px)}
 .strip::-webkit-scrollbar{display:none}
-.strip .d-proj{flex:0 0 clamp(300px,27vw,392px);scroll-snap-align:center}
+.strip .d-proj{flex:0 0 min(1000px,92%);scroll-snap-align:center}
 .d-proj{background:rgba(13,15,20,.62);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease-out),border-color .25s,box-shadow .3s,background .25s;backdrop-filter:blur(10px)}
 .d-proj:hover,.d-proj:focus-visible{transform:translateY(-5px);border-color:rgba(232,197,124,.5);box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .d-proj::before{content:"";position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:1.5px solid rgba(232,197,124,.4);border-top:1.5px solid rgba(232,197,124,.4);transition:.3s;pointer-events:none;z-index:2}
@@ -228,7 +228,7 @@ html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:
 .d-proj .pj-no{font-family:var(--mono);font-size:11px;color:var(--gold);opacity:.9;letter-spacing:.2em}
 .d-proj .pj-lang{font-family:var(--mono);font-size:9.5px;color:#fafaE9;opacity:.85;letter-spacing:.18em;border:1px solid rgba(250,250,233,.32);padding:3px 10px;border-radius:999px;background:rgba(232,197,124,.1)}
 .d-proj h3{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;margin-bottom:9px;position:relative;z-index:1;word-break:break-all}
-.d-proj p{font-size:12.5px;color:#c8d0d8;line-height:1.9;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;position:relative;z-index:1}
+.d-proj p{font-size:13px;color:#c8d0d8;line-height:2;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;position:relative;z-index:1}
 .d-proj .pj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px;position:relative;z-index:1}
 .d-proj .pj-tags span{font-size:10px;color:#e1e1e1;border:1px solid rgba(255,255,255,.2);padding:2px 10px;border-radius:999px}
 .d-proj .pj-more{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em;position:relative;z-index:1}
@@ -258,9 +258,9 @@ html.reveal-done .slogan-row:not(:has(.g)) .s-ch{opacity:1 !important;transform:
 .d-tl-status.st-dim{color:#c8d0d8;border-color:rgba(255,255,255,.28);background:transparent}
 .d-tl-text{font-size:13.5px;color:#c8d0d8;line-height:1.9;max-width:38em;overflow-wrap:anywhere}
 .d-tl:not(.open) .d-tl-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.d-tl::after{content:"⋯";position:absolute;right:2px;top:6px;color:var(--gold);opacity:0;font-size:14px;transition:opacity .25s}
-.d-tl:not(.open)::after{opacity:.55}
-.d-tl.open::after{content:"▴";opacity:.8}
+.d-tl-head::after{content:"展开 ▾";margin-left:auto;font-family:var(--sans);font-size:10.5px;letter-spacing:.14em;color:var(--gold);opacity:.55;transition:opacity .25s}
+.d-tl:hover .d-tl-head::after{opacity:1}
+.d-tl.open .d-tl-head::after{content:"收起 ▴"}
 .d-tl.open .d-tl-text{-webkit-line-clamp:unset}
 .d-tl.open{background:rgba(232,197,124,.06)}
 @media (hover:none){.d-tl:not(.open) .d-tl-text{-webkit-line-clamp:unset}.d-tl::after{display:none}}
@@ -307,6 +307,7 @@ html.reveal-done .d-tl{opacity:1 !important;transform:none !important}
 .s-hint{position:fixed;right:30px;bottom:28px;z-index:50;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
 .s-hint .sh-count{font-family:var(--mono);font-size:10.5px;color:rgba(250,250,233,.62);letter-spacing:.3em}
 .s-hint .sh-word{font-family:var(--mono);font-size:10px;color:rgba(250,250,233,.5);letter-spacing:.5em;text-indent:.5em}
+.s-hint .sh-keys{font-family:var(--mono);font-size:9px;color:rgba(250,250,233,.45);letter-spacing:.18em;margin-top:2px}
 .sh-arrow{width:1px;height:34px;background:linear-gradient(180deg,rgba(232,197,124,.9),transparent);position:relative;overflow:hidden}
 .sh-arrow::after{content:"";position:absolute;left:0;top:-14px;width:1px;height:14px;background:#f4dca8;animation:shDrop 1.8s ease-in-out infinite}
 @keyframes shDrop{to{transform:translateY(52px)}}
@@ -387,6 +388,7 @@ body[data-scene="connect"] .side-wm .wm-connect{display:block}
   .m-menu[hidden]{display:none}
 }
 @media (max-width:520px){
+  .connect-foot{font-size:10px;letter-spacing:.08em;line-height:2.2;padding:0 6px}
   .eyebrow{letter-spacing:.34em;text-indent:.34em}
   .tagline{letter-spacing:.2em;text-indent:.2em}
   .mods-grid{grid-template-columns:1fr 1fr}
@@ -468,13 +470,13 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     <div class="v-inner">
       <header class="v-head v-el" style="--i:0">
         <p class="kicker">DRIFTER FILE · 漂泊者档案</p>
-        <h2 class="v-title">总结与能力评估</h2>
+        <h2 class="v-title">漂泊者档案</h2>
         <span class="v-line"></span>
       </header>
       <div class="v-body">
       <div class="p-grid">
         <article class="panel v-el" style="--i:1">
-          <p class="ptag">// RESONANCE · 情报总结</p>
+          <p class="ptag">// RESONANCE · 总结与能力评估</p>
           <h3 class="d-h">Codename <b>PONM3AY</b><span class="d-sub">gugu · 漂泊者</span></h3>
           <p class="d-text">白天拆需求、写插件；晚上把日常动作自动化成脚本，然后 DeepSleep~zzz。专注 LLM agent 插件生态（DSH）、桌面自动化工具链与 CV 训练流水线——safeyolo、dsh-plugins、autoclaw-proxy 的维护者。</p>
           <div class="d-chips" id="dChips"></div>
@@ -549,7 +551,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
           <b>REPOS</b><span>仓库总览 · 8 REPOS</span><i>→</i>
         </a>
       </div>
-      <p class="connect-foot v-el" style="--i:5">© 2026 PONM3AY · DRIFTER ARCHIVE<span class="sep">◆</span>KURO-STYLE SCENE SITE · POWERED BY GITHUB PAGES</p>
+      <p class="connect-foot v-el" style="--i:5">© 2026 PONM3AY · DRIFTER ARCHIVE<span class="sep">◆</span>SCENE SITE · POWERED BY GITHUB PAGES</p>
       </div>
     </div>
   </section>
@@ -571,13 +573,14 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
   <span class="sh-count" id="shCount">01 / 05</span>
   <span class="sh-word">SCROLL</span>
   <i class="sh-arrow"></i>
+  <span class="sh-keys">1–5 DIRECT</span>
 </div>
 <nav class="pager" aria-label="场景页码">
-  <button class="pg on" data-go="home" aria-label="首页"><i></i><b>首页</b></button>
-  <button class="pg" data-go="profile" aria-label="档案"><i></i><b>档案</b></button>
-  <button class="pg" data-go="works" aria-label="作品"><i></i><b>作品</b></button>
-  <button class="pg" data-go="log" aria-label="轨迹"><i></i><b>轨迹</b></button>
-  <button class="pg" data-go="connect" aria-label="连接"><i></i><b>连接</b></button>
+  <button class="pg on" data-go="home" aria-label="首页" title="按 1 直达"><i></i><b>首页</b></button>
+  <button class="pg" data-go="profile" aria-label="档案" title="按 2 直达"><i></i><b>档案</b></button>
+  <button class="pg" data-go="works" aria-label="作品" title="按 3 直达"><i></i><b>作品</b></button>
+  <button class="pg" data-go="log" aria-label="轨迹" title="按 4 直达"><i></i><b>轨迹</b></button>
+  <button class="pg" data-go="connect" aria-label="连接" title="按 5 直达"><i></i><b>连接</b></button>
 </nav>
 
 <!-- 移动端菜单 -->
