@@ -258,7 +258,8 @@ html.reveal-done .strip .d-proj{opacity:1 !important;transform:none !important}
 .strip-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,rgba(232,197,124,.5),var(--gold));border-radius:999px;transition:width .25s ease-out}
 .strip-ui{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:10px}
 .st-btn{width:44px;height:44px;border-radius:999px;border:1px solid rgba(232,197,124,.4);background:rgba(13,15,20,.6);color:var(--gold-hi);font-size:16px;transition:.25s;backdrop-filter:blur(6px)}
-.st-btn:hover{background:rgba(232,197,124,.14);border-color:var(--gold)}
+.st-btn:hover:not(:disabled){background:rgba(232,197,124,.14);border-color:var(--gold)}
+.st-btn:disabled{opacity:.35;cursor:default}
 .st-count{font-family:var(--mono);font-size:12px;color:rgba(250,250,233,.75);letter-spacing:.3em;text-indent:.3em;min-width:86px;text-align:center;font-variant-numeric:tabular-nums}
 .strip-hint{text-align:center;font-family:var(--mono);font-size:10.5px;color:rgba(250,250,233,.62);letter-spacing:.24em;margin-top:12px}
 
@@ -286,7 +287,7 @@ html.reveal-done .strip .d-proj{opacity:1 !important;transform:none !important}
 .d-tl.open .d-tl-head::after{content:"收起 ▴"}
 .d-tl.open .d-tl-text{-webkit-line-clamp:unset}
 .d-tl.open{background:rgba(232,197,124,.06)}
-@media (hover:none){.d-tl:not(.open) .d-tl-text{-webkit-line-clamp:unset}.d-tl::after{display:none}}
+@media (hover:none){.d-tl:not(.open) .d-tl-text{-webkit-line-clamp:unset}.d-tl-head::after{display:none}}
 html.js .d-tl{opacity:0;transform:translateX(-18px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);transition-delay:calc(var(--i,0)*110ms + .25s)}
 html.js .d-timeline.grown .d-tl{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){html.js .d-tl{opacity:1;transform:none;transition:none}.d-timeline::before{transform:scaleY(1)}}
@@ -737,6 +738,9 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     });
     var el=document.getElementById('stCount');
     if(el)el.textContent=('0'+(best+1)).slice(-2)+' / '+('0'+cards.length).slice(-2);
+    var pv=document.getElementById('stPrev'),nx=document.getElementById('stNext');
+    if(pv)pv.disabled=best<=0;
+    if(nx)nx.disabled=best>=cards.length-1;
   }
   function padTail(){
     if(!strip)return;
@@ -744,7 +748,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     var w=c.getBoundingClientRect().width;
     strip.style.setProperty('--tail',Math.max(0,(strip.clientWidth-w)/2-6)+'px');
   }
-  addEventListener('resize',padTail);
+  addEventListener('resize',function(){padTail();updateCount()});
   setTimeout(padTail,60);
   if(strip){
     strip.addEventListener('scroll',function(){
@@ -761,13 +765,16 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     var sx=0,sl=0,dragging=false;
     strip.addEventListener('pointerdown',function(e){
       if(e.pointerType!=='mouse')return;
-      dragging=true;dragMoved=false;sx=e.clientX;sl=strip.scrollLeft;strip.setPointerCapture(e.pointerId);
+      dragging=true;dragMoved=false;sx=e.clientX;sl=strip.scrollLeft;
     });
     strip.addEventListener('pointermove',function(e){
       if(!dragging)return;
       var dx=e.clientX-sx;
-      if(Math.abs(dx)>8)dragMoved=true;
-      strip.scrollLeft=sl-dx;
+      if(!dragMoved&&Math.abs(dx)>8){
+        dragMoved=true;
+        try{strip.setPointerCapture(e.pointerId)}catch(_){}
+      }
+      if(dragMoved)strip.scrollLeft=sl-dx;
     });
     strip.addEventListener('pointerup',function(){dragging=false;setTimeout(function(){dragMoved=false},0)});
     /* 悬停视差：水印随指针轻移 */
@@ -1026,9 +1033,9 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     var strip=e.target.closest&&e.target.closest('.strip');
     if(strip){
       var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
-      /* scroll-snap 会在端点回吸，须留容差，否则右缘成死区 */
+      /* scroll-snap 会在端点回吸（实测余量 ~20px），容差取 2.2x 裕度 */
       var maxL=strip.scrollWidth-strip.clientWidth;
-      var can=(d>0&&strip.scrollLeft<maxL-24)||(d<0&&strip.scrollLeft>24);
+      var can=(d>0&&strip.scrollLeft<maxL-44)||(d<0&&strip.scrollLeft>44);
       if(can){strip.scrollLeft+=d;e.preventDefault();return}
       e.preventDefault();
       if(Math.abs(d)>=10)goStep(d>0?1:-1);
@@ -1060,14 +1067,27 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
 /* ===== 移动端菜单 ===== */
 var closeMMenu=function(){
   var m=document.getElementById('mMenu');
-  if(m&&!m.hidden){m.hidden=true;document.getElementById('burger').setAttribute('aria-expanded','false')}
+  if(m&&!m.hidden){
+    m.hidden=true;
+    document.getElementById('burger').setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
 };
 window.closeMMenu=closeMMenu;
 (function(){
   var b=document.getElementById('burger'),m=document.getElementById('mMenu'),x=document.getElementById('mClose');
   if(b&&m&&x){
-    b.addEventListener('click',function(){m.hidden=false;b.setAttribute('aria-expanded','true')});
+    b.addEventListener('click',function(){
+      m.hidden=false;
+      b.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+      var first=m.querySelector('nav a');
+      if(first)first.focus();
+    });
     x.addEventListener('click',closeMMenu);
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape')closeMMenu();
+    });
   }
 })();
 
