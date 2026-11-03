@@ -901,6 +901,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
   function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}
   size();addEventListener('resize',size);
   for(var i=0;i<24;i++)P.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.7+.5,s:Math.random()*.24+.06,o:Math.random()*.5+.2,ph:Math.random()*6.28});
+  var running=true,rafId=0;
   function tick(t){
     ctx.clearRect(0,0,W,H);
     for(var i=0;i<P.length;i++){
@@ -910,9 +911,15 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);
       ctx.fillStyle='rgba(232,197,124,'+a.toFixed(2)+')';ctx.fill();
     }
-    requestAnimationFrame(tick);
+    rafId=requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  rafId=requestAnimationFrame(tick);
+  /* 页面隐藏时暂停金尘 rAF，回落恢复——省电省 CPU */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){
+      if(running){running=false;cancelAnimationFrame(rafId)}
+    }else if(!running){running=true;rafId=requestAnimationFrame(tick)}
+  });
 })();
 
 /* ===== 标语逐字（.g 渐变容器整体晕开；第二行逐字） ===== */
