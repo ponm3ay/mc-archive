@@ -242,8 +242,8 @@ html.reveal-done .strip .d-proj{opacity:1 !important;transform:none !important}
 .d-proj::before{content:"";position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:1.5px solid rgba(232,197,124,.4);border-top:1.5px solid rgba(232,197,124,.4);transition:.3s;pointer-events:none;z-index:2}
 .d-proj::after{content:"";position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:1.5px solid rgba(232,197,124,.4);border-bottom:1.5px solid rgba(232,197,124,.4);transition:.3s;pointer-events:none;z-index:2}
 .d-proj:hover::before,.d-proj:hover::after{width:22px;height:22px;border-color:rgba(232,197,124,.75)}
-.d-proj .pj-wm{position:absolute;right:8px;top:0;font-family:var(--serif);font-weight:900;font-size:78px;line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(232,197,124,.11);user-select:none;pointer-events:none;transition:-webkit-text-stroke-color .35s,transform .5s var(--ease-out);z-index:0}
-.d-proj:hover .pj-wm{-webkit-text-stroke-color:rgba(232,197,124,.5);transform:translateX(-6px) scale(1.03)}
+.d-proj .pj-wm{position:absolute;right:10px;top:-4px;font-family:var(--serif);font-weight:900;font-size:min(110px,15vw);line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(232,197,124,.13);transform:translate(calc(var(--px,0)*1px),calc(var(--py,0)*1px));transition:transform .18s ease-out,-webkit-text-stroke-color .35s;user-select:none;pointer-events:none;transition:-webkit-text-stroke-color .35s,transform .5s var(--ease-out);z-index:0}
+.d-proj:hover .pj-wm{-webkit-text-stroke-color:rgba(232,197,124,.5)}
 .d-proj .pj-top{display:flex;justify-content:space-between;align-items:center;margin:-24px -24px 16px;padding:14px 24px;background:linear-gradient(90deg,rgba(232,197,124,.1),rgba(232,197,124,.03) 60%,transparent);border-bottom:1px solid rgba(232,197,124,.18);position:relative;z-index:1}
 .d-proj .pj-no{font-family:var(--mono);font-size:11px;color:var(--gold);opacity:.9;letter-spacing:.2em}
 .d-proj .pj-lang{font-family:var(--mono);font-size:9.5px;color:#fafaE9;opacity:.9;letter-spacing:.18em;border:1px solid rgba(250,250,233,.32);padding:3px 10px;border-radius:999px;background:rgba(13,15,20,.88)}
@@ -254,7 +254,9 @@ html.reveal-done .strip .d-proj{opacity:1 !important;transform:none !important}
 .d-proj .pj-more{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;font-size:10.5px;color:#b9b9b9;letter-spacing:.12em;position:relative;z-index:1}
 .d-proj .pj-more .pm-hint{display:inline-flex;align-items:center;gap:7px;color:var(--gold);opacity:.75;transition:opacity .25s,gap .3s var(--ease-out)}
 .d-proj:hover .pj-more .pm-hint{opacity:1;gap:11px}
-.strip-ui{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:8px}
+.strip-progress{width:min(520px,62%);height:2px;background:rgba(255,255,255,.12);margin:2px auto 0;border-radius:999px;overflow:hidden}
+.strip-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,rgba(232,197,124,.5),var(--gold));border-radius:999px;transition:width .25s ease-out}
+.strip-ui{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:10px}
 .st-btn{width:44px;height:44px;border-radius:999px;border:1px solid rgba(232,197,124,.4);background:rgba(13,15,20,.6);color:var(--gold-hi);font-size:16px;transition:.25s;backdrop-filter:blur(6px)}
 .st-btn:hover{background:rgba(232,197,124,.14);border-color:var(--gold)}
 .st-count{font-family:var(--mono);font-size:12px;color:rgba(250,250,233,.75);letter-spacing:.3em;text-indent:.3em;min-width:86px;text-align:center;font-variant-numeric:tabular-nums}
@@ -364,8 +366,10 @@ body[data-scene="connect"] .side-wm .wm-connect{display:block}
 .mc-case[hidden]{display:none}
 .mc-backdrop{position:absolute;inset:0;background:rgba(5,5,8,.84);backdrop-filter:blur(10px);animation:mcFade .3s}
 @keyframes mcFade{from{opacity:0}}
-.mc-box{position:relative;width:min(880px,100%);max-height:min(84vh,760px);overflow:auto;background:linear-gradient(165deg,#1a2431,#111722);border:1px solid rgba(232,197,124,.4);border-radius:14px;padding:38px 44px 34px;clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:mcReveal .55s var(--ease-out) .05s forwards;box-shadow:0 30px 90px rgba(0,0,0,.6)}
-@keyframes mcReveal{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+.mc-box{position:relative;width:min(880px,100%);max-height:min(84vh,760px);overflow:auto;background:linear-gradient(165deg,#1a2431,#111722);border:1px solid rgba(232,197,124,.4);border-radius:14px;padding:38px 44px 34px;clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:mcReveal .55s var(--ease-out) .05s forwards;box-shadow:0 30px 90px rgba(0,0,0,.6);transform:scale(.965);transition:transform .3s var(--ease-out)}
+.mc-case.closing .mc-box{clip-path:none;animation:mcClose .24s ease-in forwards}
+@keyframes mcClose{to{opacity:0;transform:scale(.965)}}
+@keyframes mcReveal{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transform:scale(1)}}
 .mc-wm{position:absolute;right:14px;top:0;font-family:var(--serif);font-weight:900;font-size:160px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(232,197,124,.14);user-select:none;pointer-events:none}
 .mc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;position:relative;z-index:1}
 .mc-no{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.26em;font-weight:600}
@@ -545,6 +549,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
       </header>
       <div class="strip-zone v-el" style="--i:1">
         <div class="strip" id="strip" tabindex="0" aria-label="项目卡片横向列表，可用方向键或拖拽浏览"></div>
+        <div class="strip-progress" aria-hidden="true"><i id="spFill"></i></div>
         <div class="strip-ui">
           <button class="st-btn" id="stPrev" aria-label="上一张">←</button>
           <div class="st-count" id="stCount">01 / 08</div>
@@ -745,6 +750,8 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     strip.addEventListener('scroll',function(){
       updateCount();
       strip.classList.toggle('scrolled',strip.scrollLeft>4);
+      var fill=document.getElementById('spFill');
+      if(fill)fill.style.width=((strip.scrollLeft+strip.clientWidth)/strip.scrollWidth*100)+'%';
     },{passive:true});
     /* 触屏：提示文案对准真实操作 */
     var hint=document.querySelector('.strip-hint');
@@ -763,6 +770,14 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
       strip.scrollLeft=sl-dx;
     });
     strip.addEventListener('pointerup',function(){dragging=false;setTimeout(function(){dragMoved=false},0)});
+    /* 悬停视差：水印随指针轻移 */
+    strip.addEventListener('mousemove',function(e){
+      var card=e.target.closest&&e.target.closest('.d-proj');
+      if(!card)return;
+      var r=card.getBoundingClientRect();
+      card.style.setProperty('--px',(((e.clientX-r.left)/r.width-0.5)*12).toFixed(1));
+      card.style.setProperty('--py',(((e.clientY-r.top)/r.height-0.5)*8).toFixed(1));
+    });
     strip.addEventListener('click',function(e){
       if(dragMoved)return;
       var card=e.target.closest('.d-proj');
@@ -813,6 +828,7 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
     var list=DATA.projects;if(!list.length)return;
     curIdx=(i+list.length)%list.length;
     var o=list[curIdx],d=document.getElementById('mcCase');
+    d.classList.remove('closing');
     lastFocus=document.activeElement;
     d.querySelector('.mc-wm').textContent=String(o.no).replace(/^OP-/,'');
     d.querySelector('.mc-no').textContent=o.no+' · '+o.lang;
@@ -830,7 +846,10 @@ html:not(.js) .slogan .g,html:not(.js) .slogan-row:not(:has(.g)) .s-ch,html:not(
   function closeCase(){
     var d=document.getElementById('mcCase');
     if(!d||d.hidden)return;
-    d.hidden=true;caseOpen=false;
+    if(d.classList.contains('closing'))return;
+    d.classList.add('closing');
+    setTimeout(function(){d.hidden=true;d.classList.remove('closing')},240);
+    caseOpen=false;
     if(!document.body.classList.contains('lock-scroll'))document.body.style.overflow='';
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
